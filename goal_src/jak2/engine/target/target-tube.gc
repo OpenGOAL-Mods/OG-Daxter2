@@ -492,7 +492,7 @@
         (case message
           (('change-mode)
            (case (-> block param 0)
-             (('grab)
+            (('grab)
               (when (not (focus-test? self dead))
                 (if (-> block param 1)
                     (logior! (-> self focus-status) (focus-status grabbed))
@@ -500,7 +500,10 @@
                 #t
                 )
               )
-             )
+            (('indax)
+              (go target-indax-start (the handle #f))
+              )
+            )
            )
           (('end-mode)
            (cond

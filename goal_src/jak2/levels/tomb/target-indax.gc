@@ -41,7 +41,7 @@
 
 
 (let ((v1-2 (copy *walk-mods* 'loading-level)))
-  (set! (-> v1-2 flags) (surface-flag gun-off gun-fast-exit))
+  ;; (set! (-> v1-2 flags) (surface-flag gun-off gun-fast-exit))
   (set! (-> v1-2 target-speed) 32768.0)
   (set! (-> v1-2 transv-max) 32768.0)
   (set! *indax-walk-mods* v1-2)
@@ -95,6 +95,9 @@
               )
              ((begin (set! a0-10 'falling) (= v1-5 a0-10))
               (go target-indax-falling a0-10)
+              )
+            ((or (= v1-5 'turret) (= v1-5 'board) (= v1-5 'pilot) (= v1-5 'mech))
+              (target-standard-event-handler arg0 arg1 arg2 arg3)
               )
              )
            )
@@ -445,10 +448,15 @@
   :event target-standard-event-handler
   :code (behavior ((arg0 handle))
     (target-indax-init)
+    (when (and (cpad-pressed? (-> self control cpad number) circle) (can-feet? #f))
+      (go target-indax-attack-air #f)
+      )
     (go target-indax-stance)
     )
   :post target-indax-post
   )
+
+(define *dax-highjump-factor* 1.6)
 
 (defstate target-indax-stance (target)
   :event target-indax-handler
@@ -480,7 +488,11 @@
         (go
           target-indax-jump
           (-> *TARGET-bank* indax-jump-height-min)
-          (-> *TARGET-bank* indax-jump-height-max)
+          ;; multiply max height if holding l1, high jump hack
+          (if (cpad-hold? (-> self control cpad number) l1)
+            (* (-> *TARGET-bank* indax-jump-height-max) *dax-highjump-factor*)
+            (-> *TARGET-bank* indax-jump-height-max)
+            )
           (the-as surface #f)
           )
         )
@@ -650,7 +662,8 @@
           )
         )
       (ja-no-eval :group! jakb-darkjak-bomb-loop-ja :num! (identity f26-0) :dist 13107.2)
-      (ja-no-eval :chan 1 :group! (-> self draw art-group data 423) :num! (identity f26-0) :dist 12697.6)
+      ;; (ja-no-eval :chan 1 :group! (-> self draw art-group data 423) :num! (identity f26-0) :dist 12697.6)  ;; no look back (423)
+      (ja-no-eval :chan 1 :group! jakb-darkjak-bomb-loop-ja :num! (identity f26-0) :dist 12697.6) ;; just run (417) instead
       (let ((a0-25 (-> self skel root-channel 2)))
         (let ((f0-12 (- 1.0 f30-0)))
           (set! (-> a0-25 frame-interp 1) f0-12)
@@ -820,6 +833,32 @@
           (-> *TARGET-bank* indax-double-jump-height-max)
           )
         )
+    (if (and (cpad-pressed? (-> self control cpad number) square)
+             (and ;; (< (vector-dot (-> self control dynam gravity-normal) (-> self control transv))
+                  ;;    (* 26624.0 (-> self darkjak-giant-interp) (-> self darkjak-giant-interp))
+                  ;;    )
+                  (< -61440.0 (vector-dot (-> self control dynam gravity-normal) (-> self control transv)))
+                  (and (>= (- (current-time) (-> self control last-time-of-stuck))
+                           (the-as time-frame (-> *TARGET-bank* stuck-timeout))
+                           )
+                       (not (logtest? (-> self state-flags) (state-flags prevent-attack)))
+                       (not (logtest? (-> self control current-surface flags) (surface-flag no-attack no-hands)))
+                       (not (and (not (using-gun? self)) (!= (-> self skel top-anim interp) 0.0)))
+                       )
+                  )
+             )
+        (go
+          target-flop
+          65502.96
+          -163840.0
+          (the-as float (if (= (-> *cpad-list* cpads (-> self control cpad number) stick0-speed) 0.0)
+                            0
+                            #x47866666
+                            )
+                  )
+          )
+        )
+    (mod-var-jump #t #t (cpad-hold? (-> self control cpad number) x) (-> self control transv))
     )
   :code (behavior ((arg0 float) (arg1 float) (arg2 surface))
     (ja-channel-push! 2 (seconds 0.02))
@@ -878,7 +917,32 @@
     )
   :exit (-> target-indax-jump exit)
   :trans (behavior ()
-    ((-> target-indax-falling trans))
+    ((-> target-indax-falling trans)) 
+    (if (and (cpad-pressed? (-> self control cpad number) square)
+             (and ;; (< (vector-dot (-> self control dynam gravity-normal) (-> self control transv))
+                  ;;    (* 26624.0 (-> self darkjak-giant-interp) (-> self darkjak-giant-interp))
+                  ;;    )
+                  (< -61440.0 (vector-dot (-> self control dynam gravity-normal) (-> self control transv)))
+                  (and (>= (- (current-time) (-> self control last-time-of-stuck))
+                           (the-as time-frame (-> *TARGET-bank* stuck-timeout))
+                           )
+                       (not (logtest? (-> self state-flags) (state-flags prevent-attack)))
+                       (not (logtest? (-> self control current-surface flags) (surface-flag no-attack no-hands)))
+                       (not (and (not (using-gun? self)) (!= (-> self skel top-anim interp) 0.0)))
+                       )
+                  )
+             )
+        (go
+          target-flop
+          65502.96
+          -163840.0
+          (the-as float (if (= (-> *cpad-list* cpads (-> self control cpad number) stick0-speed) 0.0)
+                            0
+                            #x47866666
+                            )
+                  )
+          )
+        )
     (mod-var-jump #t #t (cpad-hold? (-> self control cpad number) x) (-> self control transv))
     )
   :code (behavior ((arg0 float) (arg1 float))
@@ -934,7 +998,13 @@
         (go
           target-indax-jump
           (-> *TARGET-bank* indax-jump-height-min)
-          (-> *TARGET-bank* indax-jump-height-max)
+          ;; multiply max height if holding l1 and not moving, high jump hack
+          (if (and (cpad-hold? (-> self control cpad number) l1)
+                   (zero? (-> *cpad-list* cpads (-> self control cpad number) stick0-speed))
+                   )
+            (* (-> *TARGET-bank* indax-jump-height-max) *dax-highjump-factor*)
+            (-> *TARGET-bank* indax-jump-height-max)
+            )
           (the-as surface #f)
           )
         )
@@ -1058,9 +1128,85 @@
 
 (defstate target-indax-attack-air (target)
   :event target-indax-dangerous-event-handler
-  :enter (-> target-attack-air enter)
+  :enter (behavior ((arg0 symbol))
+    (set! (-> self state-time) (current-time))
+    (logclear! (-> self control status) (collide-status on-surface on-ground touch-surface))
+    (target-start-attack)
+    (target-danger-set! 'spin-air #f)
+    (set! (-> self control mod-surface) *jump-attack-mods*)
+    (set! (-> self neck flex-blend) 0.0)
+    (let ((f0-2 (vector-dot (-> self control dynam gravity-normal) (-> self control transv))))
+      (cond
+        ((or (>= 0.0 f0-2) (= arg0 'flop))
+         (let ((v1-14 (new-stack-vector0)))
+           (let ((f0-4 (vector-dot (-> self control dynam gravity-normal) (-> self control transv))))
+             0.0
+             (vector-! v1-14 (-> self control transv) (vector-float*! v1-14 (-> self control dynam gravity-normal) f0-4))
+             )
+           (let* ((f0-5 (vector-length v1-14))
+                  (f1-2 f0-5)
+                  (f2-0 33775.48)
+                  )
+             (vector+!
+               (-> self control transv)
+               (vector-float*! (-> self control transv) (-> self control dynam gravity-normal) f2-0)
+               (vector-float*! v1-14 v1-14 (/ f0-5 f1-2))
+               )
+             )
+           )
+         )
+        (else
+          (let* ((f1-5 (/ f0-2 (* (-> self control dynam gravity-length) (-> self clock seconds-per-frame))))
+                 (f0-7 (* 0.5 f1-5 (-> self clock seconds-per-frame) f0-2))
+                 )
+            (let ((v1-22 (ja-group)))
+              (if (and v1-22
+                       (or (= v1-22 (-> self draw art-group data 51))
+                           (= v1-22 (-> self draw art-group data 267))
+                           (= v1-22 (-> self draw art-group data 279))
+                           )
+                       )
+                  (set! f0-7
+                        (fmax
+                          0.0
+                          (- (-> *TARGET-bank* attack-jump-height-max)
+                             (vector-dot
+                               (-> self control dynam gravity-normal)
+                               (vector-! (new 'stack-no-clear 'vector) (-> self control trans) (-> self control last-trans-any-surf))
+                               )
+                             )
+                          )
+                        )
+                  )
+              )
+            (let ((v1-33 (new-stack-vector0)))
+              (let ((f1-11 (vector-dot (-> self control dynam gravity-normal) (-> self control transv))))
+                0.0
+                (vector-! v1-33 (-> self control transv) (vector-float*! v1-33 (-> self control dynam gravity-normal) f1-11))
+                )
+              (let* ((f1-12 (vector-length v1-33))
+                     (f2-7 f1-12)
+                     (f0-12 (+ 1024.0 (sqrtf (* 245760.0 (+ 2048.0 f0-7)))))
+                     )
+                (vector+!
+                  (-> self control transv)
+                  (vector-float*! (-> self control transv) (-> self control dynam gravity-normal) f0-12)
+                  (vector-float*! v1-33 v1-33 (/ f1-12 f2-7))
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    (set! (-> self control dynam gravity-length) 122880.0)
+    (set! (-> self control last-trans-any-surf quad) (-> self control trans quad))
+    )
   :exit (behavior ()
-    ((-> target-attack-air exit))
+    (set! (-> self control dynam gravity-max) (-> self control standard-dynamics gravity-max))
+    (set! (-> self control dynam gravity-length) (-> self control standard-dynamics gravity-length))
+    (set! (-> self control last-attack-end-time) (current-time))
+    (target-exit)
     (target-indax-exit)
     )
   :code (behavior ((arg0 symbol))
@@ -1194,7 +1340,37 @@
         )
     (go target-indax-stance)
     )
-  :post target-post
+  :trans (behavior ()
+    (when (and (logtest? (logior (logior (-> *cpad-list* cpads (-> self control cpad number) button0-rel 0)
+                                       (-> *cpad-list* cpads (-> self control cpad number) button0-rel 1)
+                                       )
+                               (-> *cpad-list* cpads (-> self control cpad number) button0-rel 2)
+                               )
+                       (pad-buttons x)
+                       )
+             (can-jump? #f)
+             )
+        (go
+          target-indax-jump
+          (-> *TARGET-bank* indax-jump-height-min)
+          (-> *TARGET-bank* indax-jump-height-max)
+          (the-as surface #f)
+          )
+        )
+    (when (and (logtest? (logior (logior (-> *cpad-list* cpads (-> self control cpad number) button0-rel 0)
+                                       (-> *cpad-list* cpads (-> self control cpad number) button0-rel 1)
+                                       )
+                               (-> *cpad-list* cpads (-> self control cpad number) button0-rel 2)
+                               )
+                       (pad-buttons circle)
+                       )
+             (can-feet? #t)
+             )
+        (go target-indax-attack)
+        )
+    (none)
+    )
+  :post target-indax-post
   )
 
 ;; WARN: Return type mismatch float vs none.
