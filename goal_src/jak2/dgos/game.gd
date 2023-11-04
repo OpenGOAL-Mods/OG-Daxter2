@@ -471,4 +471,7 @@
   "orb-placer.o"  ;; added
   "mod-custom-code.o" ;; added
   "mod-debug.o" ;; added
+  ;; keep indax loaded
+  "target-indax.o"
+  "jak-indax+0-ag.go"
  ))

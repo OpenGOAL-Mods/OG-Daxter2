@@ -1097,7 +1097,7 @@
                          (logtest? (-> self control status) (collide-status on-water))
                          )
                      )
-                (not (logtest? (focus-status dead hit grabbed in-head edge-grab pole flut tube board mech dark indax teleporting)
+                (not (logtest? (focus-status dead hit grabbed in-head edge-grab pole flut tube board mech dark teleporting)
                                (-> self focus-status)
                                )
                      )
@@ -1854,7 +1854,7 @@
   (local-vars (v0-0 vector))
   (let ((v1-0 (-> this control)))
     (cond
-      ((zero? arg0)
+      ((or (zero? arg0) (focus-test? this indax))
        (-> v1-0 trans)
        )
       ((= arg0 1)
