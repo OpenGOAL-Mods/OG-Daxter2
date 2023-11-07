@@ -124,6 +124,9 @@
             'target-turret-get-off
             'target-turret-get-on
             'target-turret-stance
+            ;; misc
+            'target-title
+            'target-float
             )
             ;; do nothing
             )
