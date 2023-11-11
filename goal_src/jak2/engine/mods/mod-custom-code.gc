@@ -127,6 +127,10 @@
             ;; misc
             'target-title
             'target-float
+            ;; edge grabs
+            'target-edge-grab
+            'target-edge-grab-jump
+            'target-edge-grab-off
             )
             ;; do nothing
             )
