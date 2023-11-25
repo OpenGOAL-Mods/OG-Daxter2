@@ -2589,24 +2589,34 @@ This commonly includes things such as:
       )
     (when (= s2-0 (pickup-type eco-pill-random))
       f30-0
-      (you-suck-stage *game-info* #f)
-      (set! s2-0 (pickup-type eco-pill-dark))
-      (set! f30-0 (cond
-                    ((< 20 (-> *game-info* live-eco-pill-count))
-                     (return (the-as (pointer process) #f))
-                     f30-0
-                     )
-                    ((< 10 (-> *game-info* live-eco-pill-count))
-                     1.0
-                     )
-                    ((type? this fact-info-enemy)
-                     (+ (rand-vu-float-range 3.0 (+ 5.0 f30-0)) (the float arg3))
-                     )
-                    (else
-                      (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
+      ;; give health drops more frequently
+      (cond
+        ((< (rand-vu-int-count 10) (+ 1 (you-suck-stage *game-info* #f)))
+          (set! s2-0 (pickup-type health))
+          (set! f30-0 2.0)
+          )
+        (else
+          (set! s2-0 (pickup-type eco-pill-dark))
+          )
+        )
+      (when (= s2-0 (pickup-type eco-pill-dark))
+        (set! f30-0 (cond
+                      ((< 20 (-> *game-info* live-eco-pill-count))
+                      (return (the-as (pointer process) #f))
+                      f30-0
                       )
-                    )
-            )
+                      ((< 10 (-> *game-info* live-eco-pill-count))
+                      1.0
+                      )
+                      ((type? this fact-info-enemy)
+                      (+ (rand-vu-float-range 3.0 (+ 5.0 f30-0)) (the float arg3))
+                      )
+                      (else
+                        (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
+                        )
+                      )
+              )
+        )
       )
     (let ((s3-1 (new 'stack-no-clear 'collide-query)))
       (set! (-> s3-1 start-pos quad) (-> (the-as process-drawable (-> this process)) root trans quad))
