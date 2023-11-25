@@ -128,7 +128,7 @@
                       :dummy (seconds 15)
                       :health-max-default 8.0
                       :health-single-inc 1.0
-                      :health-default-inc 2.0
+                      :health-default-inc 1.0
                       :health-darkjak-inc 0.1
                       :health-darkjak-min 1.05
                       :health-darkjak-error 0.05

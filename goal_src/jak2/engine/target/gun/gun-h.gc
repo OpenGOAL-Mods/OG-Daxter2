@@ -144,7 +144,7 @@
                  (-> arg0 game features)
                  )
        (or (not (logtest? (-> arg0 control current-surface flags) (surface-flag duck))) (can-exit-duck? arg0))
-       (or (not (focus-test? arg0 pilot)) (-> arg0 pilot gun?))
+       (and (focus-test? arg0 pilot) (-> arg0 pilot gun?))
        (or arg1
            (nonzero? (-> arg0 gun using-gun-type))
            (begin
