@@ -348,6 +348,9 @@
             (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
             (set! (-> self offset trans y) (meters -0.7)) ;; up/down
             )
+          ((target-grab)
+            (set! (-> self offset trans y) (meters -2.1)) ;; up/down
+            )
           )
         )
       (update-anim-data (-> self skel))

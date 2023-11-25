@@ -312,8 +312,10 @@
             'target-pilot-get-off
             'target-pilot-hit
             'target-pilot-impact)
-            ;; only show guns while driving (dax shooting)
-            (logclear! (-> self draw status) (draw-control-status no-draw))
+            ;; only show guns while driving and gun active
+            (if (using-gun? *target*)
+              (logclear! (-> self draw status) (draw-control-status no-draw))
+              )
             )
           (else
             (logior! (-> self draw status) (draw-control-status no-draw))
