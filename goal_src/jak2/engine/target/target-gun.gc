@@ -230,6 +230,7 @@
       )
   (set-setting! 'mode-sound-bank 'gun 0.0 0)
   (sound-play "gun-takeout")
+  (logclear! (-> (the gun (ppointer->process (-> self gun gun))) draw status) (draw-control-status no-draw))
   (set-setting! 'sound-flava #f 30.0 1)
   (set! (-> self gun charge-ammo) 0.0)
   (set! (-> self gun charge-start-time) 0)
@@ -382,6 +383,7 @@
             (not (logtest? (-> self focus-status) (focus-status dead)))
             )
        (sound-play "gun-putaway")
+       (logior! (-> (the gun (ppointer->process (-> self gun gun))) draw status) (draw-control-status no-draw))
        (cond
          ((focus-test? self pilot-riding)
           (case (-> self gun gun-type)

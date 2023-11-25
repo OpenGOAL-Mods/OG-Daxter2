@@ -141,6 +141,8 @@
             ;; misc
             'target-title
             'target-float
+            'target-continue
+            'target-grab
             ;; edge grabs
             'target-edge-grab
             'target-edge-grab-jump
