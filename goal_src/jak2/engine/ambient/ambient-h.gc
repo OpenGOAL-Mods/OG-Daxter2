@@ -161,36 +161,36 @@
       :neg #x1
       :on-close #f
       )
-    (new 'static 'talker-speech-class
-      :name "ds020"
-      :channel (gui-channel daxter)
-      :flags #x3
-      :speech #xb
-      :text-message (text-id tutorial-roll)
-      :text-duration #x5dc
-      :neg #x1
-      :on-close #f
-      )
-    (new 'static 'talker-speech-class
-      :name "ds043"
-      :channel (gui-channel daxter)
-      :flags #x11
-      :speech #xc
-      :text-message (text-id tutorial-rolljump)
-      :text-duration #x12c
-      :neg #x1
-      :on-close #f
-      )
-    (new 'static 'talker-speech-class
-      :name "ds043m"
-      :channel (gui-channel message)
-      :flags #x10
-      :speech #xd
-      :text-message (text-id tutorial-rolljump)
-      :text-duration #x12c
-      :neg #x1
-      :on-close #f
-      )
+    ;; (new 'static 'talker-speech-class
+    ;;   :name "ds020"
+    ;;   :channel (gui-channel daxter)
+    ;;   :flags #x3
+    ;;   :speech #xb
+    ;;   :text-message (text-id tutorial-roll)
+    ;;   :text-duration #x5dc
+    ;;   :neg #x1
+    ;;   :on-close #f
+    ;;   )
+    ;; (new 'static 'talker-speech-class
+    ;;   :name "ds043"
+    ;;   :channel (gui-channel daxter)
+    ;;   :flags #x11
+    ;;   :speech #xc
+    ;;   :text-message (text-id tutorial-rolljump)
+    ;;   :text-duration #x12c
+    ;;   :neg #x1
+    ;;   :on-close #f
+    ;;   )
+    ;; (new 'static 'talker-speech-class
+    ;;   :name "ds043m"
+    ;;   :channel (gui-channel message)
+    ;;   :flags #x10
+    ;;   :speech #xd
+    ;;   :text-message (text-id tutorial-rolljump)
+    ;;   :text-duration #x12c
+    ;;   :neg #x1
+    ;;   :on-close #f
+    ;;   )
     (new 'static 'talker-speech-class
       :name "ds046"
       :channel (gui-channel daxter)

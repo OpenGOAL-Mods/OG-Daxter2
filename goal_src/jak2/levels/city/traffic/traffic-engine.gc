@@ -1877,6 +1877,10 @@
   )
 
 (defun traffic-los-clear? ((arg0 vector) (arg1 vector))
+  ;; offset LOS for indax
+  (if (focus-test? *target* indax)
+    (+! (-> arg1 y) (meters 2.0))
+    )
   (let ((v1-0 (new 'stack-no-clear 'collide-query)))
     (set! (-> v1-0 start-pos quad) (-> arg0 quad))
     (vector-! (-> v1-0 move-dist) arg1 arg0)
@@ -2144,7 +2148,10 @@
            (target-pos (new 'stack-no-clear 'vector))
            )
        (when target-proc
-         (set! (-> target-pos quad) (-> (get-trans (the-as process-focusable target-proc) 3) quad))
+         (if (focus-test? *target* indax)
+          (set! (-> target-pos quad) (-> (get-trans (the-as process-focusable target-proc) 0) quad))
+          (set! (-> target-pos quad) (-> (get-trans (the-as process-focusable target-proc) 3) quad))
+          )
          (cond
            ((= (-> (the-as process-focusable target-proc) type) target)
             (let ((s1-1 (-> this alert-state target-status-array)))
