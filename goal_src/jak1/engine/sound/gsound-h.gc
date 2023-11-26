@@ -358,6 +358,8 @@
   ()
   )
 
+
+
 ;; og:preserve-this added for mirror mode
 (deftype sound-rpc-set-mirror-mode (sound-rpc-cmd)
   ((mirror sound-mirror-mode)))

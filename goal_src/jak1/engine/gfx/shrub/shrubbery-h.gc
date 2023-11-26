@@ -101,6 +101,7 @@
    )
   )
 
+
 (defun shrubbery-login-post-texture ((this shrubbery))
   "Copies adgif shader crap to somewhere"
   ;; total number of adgif shaders for this shrubbery object.

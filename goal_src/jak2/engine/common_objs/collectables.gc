@@ -2589,25 +2589,32 @@ This commonly includes things such as:
           )
         (else
           (set! s2-0 (pickup-type eco-pill-dark))
-          )
-        )
-      (when (= s2-0 (pickup-type eco-pill-dark))
-        (set! f30-0 (cond
-                      ((< 20 (-> *game-info* live-eco-pill-count))
-                      (return (the-as (pointer process) #f))
-                      f30-0
-                      )
-                      ((< 10 (-> *game-info* live-eco-pill-count))
-                      1.0
-                      )
-                      ((type? this fact-info-enemy)
-                      (+ (rand-vu-float-range 3.0 (+ 5.0 f30-0)) (the float arg3))
-                      )
-                      (else
-                        (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
+          (set! f30-0 (cond
+                        ((< 20 (-> *game-info* live-eco-pill-count))
+                        (return (the-as (pointer process) #f))
+                        f30-0
                         )
-                      )
-              )
+                        ((< 10 (-> *game-info* live-eco-pill-count))
+                        1.0
+                        )
+                        ((type? this fact-info-enemy)
+                        (+ (rand-vu-float-range 3.0 (+ 5.0 f30-0)) (the float arg3))
+                        )
+                        (else
+                          (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
+                          )
+                          ((< 10 (-> *game-info* live-eco-pill-count))
+                          1.0
+                          )
+                          ((type? this fact-info-enemy)
+                          (+ (rand-vu-float-range 3.0 (+ 5.0 f30-0)) (the float arg3))
+                          )
+                          (else
+                            (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
+                            )
+                          )
+                  )
+            )
         )
       )
     (let ((s3-1 (new 'stack-no-clear 'collide-query)))
