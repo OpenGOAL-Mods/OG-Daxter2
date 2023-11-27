@@ -1134,6 +1134,7 @@
   (and (or (logtest? (-> self control status) (collide-status on-surface))
            (not (time-elapsed? (-> self control last-time-on-surface) (the-as time-frame (-> *TARGET-bank* ground-timeout)))
                 )
+           (and (time-elapsed? (-> self state-time) (seconds 0.1)) (logtest? (-> self control status) (collide-status touch-surface)))
            (and (logtest? (-> self control status) (collide-status on-surface))
                 (< 0.866 (-> self control surface-angle))
                 )
