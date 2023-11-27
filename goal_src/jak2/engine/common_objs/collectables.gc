@@ -2603,16 +2603,7 @@ This commonly includes things such as:
                         (else
                           (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
                           )
-                          ((< 10 (-> *game-info* live-eco-pill-count))
-                          1.0
-                          )
-                          ((type? this fact-info-enemy)
-                          (+ (rand-vu-float-range 3.0 (+ 5.0 f30-0)) (the float arg3))
-                          )
-                          (else
-                            (+ (rand-vu-float-range 2.0 (+ 3.0 f30-0)) (the float arg3))
-                            )
-                          )
+                        )
                   )
             )
         )
