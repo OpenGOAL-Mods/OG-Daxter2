@@ -147,8 +147,10 @@
             'target-edge-grab
             'target-edge-grab-jump
             'target-edge-grab-off
+            'target-jump-forward
             )
             ;; do nothing
+            ;; (format 0 "no indax event while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name))
             )
           (else
             ;; force to indax mode

@@ -2646,7 +2646,7 @@
     ;;      )
     ;;     (else
     ;;       (let* ((f1-5 (/ f0-2 (* (-> self control dynam gravity-length) (seconds-per-frame))))
-    ;;              (f0-7 (* (/ f1-5 2) (seconds-per-frame) f0-2))
+    ;;              (f0-7 (* 0.5 f1-5 (seconds-per-frame) f0-2))
     ;;              )
     ;;         (let ((v1-22 (ja-group)))
     ;;           (if (and v1-22
@@ -2692,10 +2692,10 @@
     ;; (set! (-> self control last-trans-any-surf quad) (-> self control trans quad))
     )
   :exit (behavior ()
-    ;; (set! (-> self control dynam gravity-max) (-> self control standard-dynamics gravity-max))
-    ;; (set! (-> self control dynam gravity-length) (-> self control standard-dynamics gravity-length))
-    ;; (set-time! (-> self control last-attack-end-time))
-    ;; (target-exit)
+    (set! (-> self control dynam gravity-max) (-> self control standard-dynamics gravity-max))
+    (set! (-> self control dynam gravity-length) (-> self control standard-dynamics gravity-length))
+    (set-time! (-> self control last-attack-end-time))
+    (target-exit)
     )
   :trans (behavior ()
     (when (logtest? (-> self control status) (collide-status on-surface))
