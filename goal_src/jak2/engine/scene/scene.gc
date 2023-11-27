@@ -128,7 +128,13 @@
                 (if (nonzero? (-> this shadow-values))
                     (send-event (ppointer->process s4-0) 'shadow-values (* (-> this shadow-values) 8))
                     )
-                (if (or s3-0 (and s4-0 (not (logtest? (-> this flags) 1)) (nonzero? (-> (the-as process-drawable (-> s4-0 0)) draw))))
+                (if (or s3-0  ;; adult jak always hidden
+                        ;; (and (string= (-> this name) "jakone-highres") ;; young jak and not in village1 part of cutscene
+                        ;;      (not (string= (-> (the scene-player (ppointer->process *scene-player*)) scene name) "intro-samos-hut"))
+                        ;;      (not (string= (-> (the scene-player (ppointer->process *scene-player*)) scene name) "intro-vortex"))
+                        ;;      )
+                        (and s4-0 (not (logtest? (-> this flags) 1)) (nonzero? (-> (the-as process-drawable (-> s4-0 0)) draw)))
+                        )
                     (logior! (-> (the-as process-drawable (-> s4-0 0)) draw status) (draw-control-status no-draw-bounds))
                     )
                 (if (-> this shadow-volume-joint)
