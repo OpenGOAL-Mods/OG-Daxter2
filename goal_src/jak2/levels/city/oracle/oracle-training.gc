@@ -57,7 +57,7 @@
       (('notify)
        (case (-> arg3 param 0)
          (('attack)
-          (if (= (-> arg3 param 1) 16)
+          (if (= (-> arg3 param 1) 16)  ;; dark bomb
               (go-virtual complete)
               )
           )
@@ -151,7 +151,7 @@
       (('notify)
        (case (-> arg3 param 0)
          (('attack)
-          (if (= (-> arg3 param 1) 17)
+          (if (= (-> arg3 param 1) 17)  ;; dark blast
               (go-virtual complete)
               )
           )

@@ -8,6 +8,13 @@
 (declare-type sidekick process-drawable)
 (define-extern init-sidekick (function none :behavior sidekick))
 
+(defun get-sidekick () 
+  (when *target*
+    (return (the sidekick (ppointer->process (-> *target* sidekick))))
+    )
+  (the sidekick #f)
+  )
+
 ;; DECOMP BEGINS
 
 (defskelgroup skel-sidekick daxter daxter-lod0-jg -1
@@ -314,12 +321,12 @@
            )
           )
         )
-      (let ((v1-85 (-> self parent 0 draw color-mult quad)))
-        (set! (-> self draw color-mult quad) v1-85)
-        )
-      (let ((v1-89 (-> self parent 0 draw color-emissive quad)))
-        (set! (-> self draw color-emissive quad) v1-89)
-        )
+      ;; (let ((v1-85 (-> self parent 0 draw color-mult quad)))
+      ;;   (set! (-> self draw color-mult quad) v1-85)
+      ;;   )
+      ;; (let ((v1-89 (-> self parent 0 draw color-emissive quad)))
+      ;;   (set! (-> self draw color-emissive quad) v1-89)
+      ;;   )
       (set! (-> self draw force-fade) (-> self parent 0 draw force-fade))
       (set! (-> self draw death-vertex-skip) (-> self parent 0 draw death-vertex-skip))
       (set! (-> self draw death-effect) (-> self parent 0 draw death-effect))
@@ -336,9 +343,16 @@
       (when *target*
         (case (-> *target* state)
           ((target-edge-grab target-edge-grab-jump target-pilot-edge-grab)
-            ;; (set! (-> self offset trans x) (meters 2.0)) ;; left/right relative
-            (set! (-> self offset trans y) (meters 1.09)) ;; up/down
-            (set! (-> self offset trans z) (meters 0.4))  ;; forward/back relative
+            (cond
+              ((focus-test? *target* dark)
+                (set! (-> self offset trans y) (meters -0.125)) ;; up/down
+                (set! (-> self offset trans z) (meters 0.3))  ;; forward/back relative
+                )
+              (else
+                (set! (-> self offset trans y) (meters 1.09)) ;; up/down
+                (set! (-> self offset trans z) (meters 0.4))  ;; forward/back relative
+                )
+              )
             )
           ((target-pole-cycle)
             ;; doesnt seem to follow jak's orientation, maybe could try to figure that out but meh

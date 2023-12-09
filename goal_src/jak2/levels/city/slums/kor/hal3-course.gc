@@ -436,7 +436,7 @@
               (set! (-> a1-1 param 0) (the-as uint 6))
               (let ((v1-6 (send-event-function *traffic-manager* a1-1)))
                 (if (and (not (logtest? (-> arg0 bot-task-bits) (bot-task-bits botbits-1)))
-                         (and (>= 12 (the-as int v1-6)) (send-event *target* 'change-mode 'darkjak #f (darkjak-stage active)))
+                         (and (>= 12 (the-as int v1-6)) (send-event *target* 'change-mode 'darkjak #f (darkjak-stage active force-on)))
                          )
                     (logior! (-> arg0 bot-task-bits) (bot-task-bits botbits-1))
                     )
