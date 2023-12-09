@@ -95,6 +95,13 @@
   (none)
   )
 
+(defun target-darkjak-choose-part-proc ((self target))
+  (if (focus-test? self indax)
+    (the process-drawable (ppointer->process (-> self sidekick)))
+    (the process-drawable self)
+    )
+  )
+
 (defbehavior target-darkjak-process target ()
   (local-vars (gp-0 vector))
   (cond
@@ -190,7 +197,11 @@
       (set! (-> a3-7 w) 1.0)
       (t9-14 a0-43 (the-as vector a1-11) (the-as quaternion a2-8) a3-7)
       )
-    (set-darkjak-texture-morph! f30-0)
+    ;; (set-darkjak-texture-morph! f30-0)
+    ;; instead just make dax purple
+    (set! (-> *target* draw color-mult x) (lerp 1.0 0.4 f30-0))
+    (set! (-> *target* draw color-mult y) (lerp 1.0 0.1 f30-0))
+    (set! (-> *target* draw color-mult z) (lerp 1.0 3.0 f30-0))
     (cond
       ((and (= f30-0 0.0) (not (time-elapsed? (-> self teleport-time) (seconds 0.5))))
        (set! (-> self skel override 0) 0.00001)
@@ -219,14 +230,14 @@
                )
       (launch-particles
         (-> *part-id-table* 178)
-        (process-drawable-random-point! self (new 'stack-no-clear 'vector))
+        (process-drawable-random-point! (target-darkjak-choose-part-proc self) (new 'stack-no-clear 'vector))
         )
       (cond
         ((rand-vu-percent? 0.25)
          (when (>= (- (-> *display* game-clock frame-counter) (-> self shock-effect-time)) (seconds 0.02))
            (set! (-> self shock-effect-time) (-> *display* game-clock frame-counter))
            (process-drawable-shock-wall-effect
-             self
+             (target-darkjak-choose-part-proc self)
              (-> *lightning-spec-id-table* 8)
              lightning-probe-callback
              (-> *part-id-table* 179)
@@ -237,7 +248,7 @@
          (when (>= (- (-> *display* game-clock frame-counter) (-> self shock-effect-time)) (seconds 0.02))
            (set! (-> self shock-effect-time) (-> *display* game-clock frame-counter))
            (process-drawable-shock-effect
-             self
+             (target-darkjak-choose-part-proc self)
              (-> *lightning-spec-id-table* 6)
              lightning-probe-callback
              (-> *part-id-table* 179)
@@ -315,7 +326,7 @@
         (logclear! (-> self state-flags) (state-flags sf4))
         )
     (if (logtest? arg0 (darkjak-stage no-anim))
-        (go target-stance)
+        (go target-indax-start (the handle #f))
         )
     (set-setting! 'bg-r 'abs 0.1 0)
     (set-setting! 'bg-b 'abs 0.1 0)
@@ -325,7 +336,7 @@
         (target-falling-anim-trans)
         (+! s5-0 (- (current-time) (-> self clock old-frame-counter)))
         (if (>= s5-0 300)
-            (go target-falling #f)
+            (go target-indax-start (the handle #f))
             )
         (suspend)
         )
@@ -381,7 +392,7 @@
           2
           )
       )
-    (go target-stance)
+    (go target-indax-start (the handle #f))
     )
   :post (-> target-grab post)
   )
@@ -455,8 +466,8 @@
              (target-falling-anim-trans)
              (+! gp-0 (- (current-time) (-> self clock old-frame-counter)))
              (if (>= gp-0 300)
-                 (go target-falling #f)
-                 )
+                (go target-indax-start (the handle #f))
+                )
              (suspend)
              )
            )
@@ -571,7 +582,7 @@
     (label cfg-133)
     (vector-reset! (-> self control transv))
     ((-> target-darkjak-get-off exit))
-    (go target-stance)
+    (go target-indax-start (the handle #f))
     )
   :post (-> target-grab post)
   )
@@ -1924,7 +1935,7 @@
         )
       )
     (send-event *traffic-manager* 'increase-alert-level 4)
-    (go target-stance)
+    (go target-indax-start (the handle #f))
     )
   :post (-> target-grab post)
   )

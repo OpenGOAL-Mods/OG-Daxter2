@@ -303,7 +303,7 @@
       (else
         (case message
           (('end-mode)
-           (go target-stance)
+           (go target-indax-start (the handle #f))
            )
           (('play-anim)
            (go target-grab (the-as symbol (-> block param 0)))

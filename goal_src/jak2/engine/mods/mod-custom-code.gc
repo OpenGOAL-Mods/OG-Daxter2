@@ -49,7 +49,8 @@
       ;; switch in/out of daxter states
       (when *target*
         (case (-> *target* state name)
-          (('target-indax-attack
+          ((#f
+            'target-indax-attack
             'target-indax-attack-air 
             'target-indax-death
             'target-indax-double-jump
@@ -148,6 +149,12 @@
             'target-edge-grab-jump
             'target-edge-grab-off
             'target-jump-forward
+            ;; darkjak transitions
+            'target-darkjak-get-on
+            'target-darkjak-get-off
+            'target-darkjak-bomb0
+            'target-darkjak-bomb1
+            'target-darkjak-giant
             )
             ;; do nothing
             ;; (format 0 "no indax event while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name))

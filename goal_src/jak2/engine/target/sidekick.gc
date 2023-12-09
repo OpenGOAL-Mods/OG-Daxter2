@@ -351,6 +351,12 @@
           ((target-grab)
             (set! (-> self offset trans y) (meters -2.1)) ;; up/down
             )
+          ((target-darkjak-get-on)
+            (set! (-> self offset trans y) (meters -1.5)) ;; up/down
+            )
+          ((target-darkjak-get-off)
+            (set! (-> self offset trans y) (meters -1.4)) ;; up/down
+            )
           )
         )
       (update-anim-data (-> self skel))
@@ -501,6 +507,7 @@
     )
   (set! (-> self draw shadow-ctrl) *target-shadow-control*)
   (logior! (-> self skel status) (joint-control-status sync-math blend-shape eye-anim))
+  (#when PC_PORT (set! (-> self skel postbind-function) process-drawable-joint-callback-pc))
   (set! (-> self draw light-index) (the-as uint 30))
   (let ((v1-14 (-> self node-list data)))
     (set! (-> v1-14 0 param0) (the-as (function cspace transformq none) cspace<-cspace+transformq!))
