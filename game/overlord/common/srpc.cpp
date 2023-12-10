@@ -3,6 +3,8 @@
 #include <cstring>
 #include "game/sound/sndshim.h"
 
+#include "game/sound/sndshim.h"
+
 // added
 u32 gMusicFadeHack = 0;
 MusicTweaks gMusicTweakInfo;

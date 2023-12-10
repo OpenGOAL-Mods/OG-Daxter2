@@ -5,6 +5,7 @@
 
 #include "loader.h"
 #include "midi_handler.h"
+#include "musicbank.h"
 #include "sound_handler.h"
 #include "vagvoice.h"
 #include "musicbank.h"
@@ -24,11 +25,11 @@ class AmeHandler : public SoundHandler {
 
  public:
   AmeHandler(MultiMidi* block,
-              VoiceManager& vm,
-              MusicBank::MIDISound& sound,
-              s32 vol,
-              s32 pan,
-              SoundBank& bank);
+             VoiceManager& vm,
+             MusicBank::MIDISound& sound,
+             s32 vol,
+             s32 pan,
+             SoundBank& bank);
   bool Tick() override;
   SoundBank& Bank() override { return m_bank; };
 

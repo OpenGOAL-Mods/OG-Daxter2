@@ -6,7 +6,6 @@
 ;; dgos: GAME, COMMON, L1
 
 ;; DECOMP BEGINS
-
 (deftype babak (nav-enemy)
   ()
   (:states
