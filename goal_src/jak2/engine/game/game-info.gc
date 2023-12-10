@@ -356,7 +356,8 @@
      (+! (-> this task-counter) 1)
      (reset! (-> *display* total-game-clock))
      (set! (-> this features) (game-feature sidekick))
-     (set! (-> this debug-features) (game-feature board darkjak darkjak-bomb0 darkjak-bomb1 darkjak-giant))
+     (set! (-> this debug-features) (game-feature sidekick))
+    ;;  (set! (-> this debug-features) (game-feature board darkjak darkjak-bomb0 darkjak-bomb1 darkjak-giant))
      (if *debug-segment*
       (set! (-> this secrets) (game-secrets endless-dark))
       (set! (-> this secrets) (game-secrets))
