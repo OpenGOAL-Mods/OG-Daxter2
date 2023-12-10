@@ -34,7 +34,7 @@
   "1216": "Morph Gun",
   "1217": "JET-Board",
   "1218": "Titan Suit",
-  "1219": "Dark Jak",
+  "1219": "Dark Daxter",
   "121a": "Vehicle",
   "121b": "Danger",
   "121c": "None",
@@ -222,7 +222,7 @@
   "132c": "Jump",
   "132d": "Duck Jump",
   "132e": "Quick Jump",
-  "132f": "Dark Jak",
+  "132f": "Dark Daxter",
   "1330": "Dark Bomb",
   "1331": "Dark Blast",
   "1332": "Dark Giant",
@@ -232,5 +232,13 @@
   "1336": "Fast Progress Menu",
   "1337": "PS2 LOD Distance",
   "1338": "Off",
-  "1339": "Display"
+  "1339": "Display",
+  
+  "0161": "Unlimited Dark Daxter",
+  "0275": "Dark Daxter is now invincible!",
+  "0276": "Dark Giant: Press <PAD_L2> while in Dark Daxter mode",
+  "2000": "<PAD_TRIANGLE>",
+  "2001": "<PAD_CIRCLE>",
+  "2002": "<PAD_X>",
+  "2003": "<PAD_SQUARE>"
 }
