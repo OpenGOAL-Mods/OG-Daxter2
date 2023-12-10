@@ -620,7 +620,7 @@ void update_discord_rpc(u32 discord_info) {
         strcpy(small_image_text, "Playing as Daxter");
       } else if (FOCUS_TEST(focus_status, FocusStatus::Dark)) {
         strcpy(small_image_key, "focus-status-dark");
-        strcpy(small_image_text, "Dark Jak");
+        strcpy(small_image_text, "Dark Daxter");
       } else if (FOCUS_TEST(focus_status, FocusStatus::Disable) &&
                  FOCUS_TEST(focus_status, FocusStatus::Grabbed)) {
         // being in a turret sets disable and grabbed flags
