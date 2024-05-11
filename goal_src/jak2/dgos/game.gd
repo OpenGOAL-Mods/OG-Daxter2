@@ -29,6 +29,7 @@
   "dma-buffer.o"
   "dma-bucket.o"
   "dma-disasm.o"
+  "statistics-h.o" ;; added
   "pckernel-h.o" ;; added
   "pckernel-impl.o" ;; added
   "pc-debug-common.o" ;; added
@@ -336,6 +337,7 @@
   "prototype.o"
   "main-collide.o"
   "video.o"
+  "capture-pc.o" ;; added
   "pckernel-common.o" ;; added
   "pckernel.o" ;; added
   "subtitle2-h.o" ;; added
@@ -435,6 +437,7 @@
   "nav-enemy-h.o"
   "rigid-body-h.o"
   "damage-number.o" ;; added
+  "statistics.o" ;; added
   "enemy.o"
   "nav-enemy.o"
   "base-plat.o"
@@ -464,7 +467,9 @@
   "entity-debug.o" ;; added
   "mod-settings.o" ;; added
   "mod-common-functions.o" ;; added
+  "orb-placer.o"  ;; added
   "mod-custom-code.o" ;; added
+  "mod-debug.o" ;; added
   ;; keep indax loaded
   "target-indax.o"
   "jak-indax+0-ag.go"

@@ -1,4 +1,4 @@
-// Copyright: 2021 - 2022, Ziemas
+// Copyright: 2021 - 2024, Ziemas
 // SPDX-License-Identifier: ISC
 #pragma once
 #include <array>
@@ -8,7 +8,6 @@
 #include "musicbank.h"
 #include "sound_handler.h"
 #include "vagvoice.h"
-#include "musicbank.h"
 
 #include "common/common_types.h"
 

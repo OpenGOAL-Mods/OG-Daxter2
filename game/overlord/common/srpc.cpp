@@ -1,7 +1,6 @@
 #include "srpc.h"
 
 #include <cstring>
-#include "game/sound/sndshim.h"
 
 #include "game/sound/sndshim.h"
 
