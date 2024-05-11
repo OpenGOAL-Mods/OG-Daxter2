@@ -481,4 +481,8 @@
   "debris.o"
   "shield-sphere.o"
   "entity-debug.o" ;; added
+  ;; keep indax loaded
+  "target-indax.o"
+  "target-indax-hang.o"
+  "jak-indax+0-ag.go"
  ))

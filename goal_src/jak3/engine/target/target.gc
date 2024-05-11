@@ -1964,7 +1964,7 @@
     )
   :code (behavior ((arg0 symbol))
     (target-hit-ground-anim #f (are-still?))
-    (go target-stance)
+    (go target-indax-start (the handle #f) #f) ;; (go target-stance)
     )
   :post target-post
   )
@@ -3704,7 +3704,7 @@
       (if (and (recently-pressed? circle)
                (can-feet? #f)
                )
-          (go target-attack-air 'flop)
+          (go target-attack-air #f) ;; 'flop)
           )
     (when (and (and (= (-> self fact eco-type) 2) (>= (-> self fact eco-level) 1.0))
                (not (time-elapsed? (-> self state-time) (seconds 0.25)))
