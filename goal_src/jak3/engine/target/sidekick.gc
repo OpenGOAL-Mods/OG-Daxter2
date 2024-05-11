@@ -359,6 +359,40 @@
         (set! (-> self offset trans y) (* 204.8 f0-7))
         (set! (-> self offset trans z) (* 409.6 f0-7))
         )
+      ;; offset daxter position in some states
+      (when *target*
+        (case (-> *target* state)
+          ((target-edge-grab target-edge-grab-jump target-pilot-edge-grab)
+            (cond
+              ((focus-test? *target* dark)
+                (set! (-> self offset trans y) (meters -0.125)) ;; up/down
+                (set! (-> self offset trans z) (meters 0.3))  ;; forward/back relative
+                )
+              (else
+                (set! (-> self offset trans y) (meters 1.09)) ;; up/down
+                (set! (-> self offset trans z) (meters 0.4))  ;; forward/back relative
+                )
+              )
+            )
+          ((target-pole-cycle)
+            ;; doesnt seem to follow jak's orientation, maybe could try to figure that out but meh
+            ;; (set! (-> self offset trans y) (meters 1.09)) ;; up/down
+            )
+          ((target-pilot-stance)
+            (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
+            (set! (-> self offset trans y) (meters -0.7)) ;; up/down
+            )
+          ((target-grab)
+            (set! (-> self offset trans y) (meters -2.1)) ;; up/down
+            )
+          ((target-darkjak-get-on)
+            (set! (-> self offset trans y) (meters -1.5)) ;; up/down
+            )
+          ((target-darkjak-get-off)
+            (set! (-> self offset trans y) (meters -1.4)) ;; up/down
+            )
+          )
+        )
       (cond
         ((= (-> self parent 0 skel override 0) 0.00001)
          (set! (-> self skel override 0) 0.00001)
@@ -451,6 +485,10 @@
         )
       (update-anim-data (-> self skel))
       (do-joint-math (-> self draw) (-> self node-list) (-> self skel))
+      )
+    ;; hack to copy indax position to last daxter shoulder position
+    (when (and *target* (focus-test? *target* indax))
+      (vector-copy! (-> self parent 0 control sidekick-root parent bone transform trans) (-> *target* root trans))
       )
     (when *display-sidekick-stats*
       (format *stdcon* "~%")

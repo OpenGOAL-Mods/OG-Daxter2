@@ -321,7 +321,7 @@
           (('end-mode)
            (case (-> block param 0)
              (('grab)
-              (go target-stance)
+              (go target-indax-start (the handle #f) #f) ;; (go target-stance)
               )
              (('gun)
               (target-gun-end-mode #t)

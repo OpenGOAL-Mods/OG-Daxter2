@@ -1934,7 +1934,7 @@
                  )
              (and (< f0-17 0.0)
                   (and (or (not (and (= *cheat-mode* 'debug) (cpad-hold? (-> self control cpad number) r2))) *pause-lock*)
-                       (not (focus-test? self flut pilot mech indax))
+                       (not (focus-test? self flut pilot mech))
                        (not (logtest? (-> self target-flags) (target-flags prevent-jump)))
                        #t
                        )
