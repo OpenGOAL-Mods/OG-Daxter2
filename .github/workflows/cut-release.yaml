@@ -26,7 +26,7 @@ jobs:
       metadataDescription: "Daxter finally gets his sequel"
       metadataSupportedGames: "jak2"
       metadataAuthors: "barg"
-      metadataTags: "beta,challenge,speedrunning"
+      metadataTags: "challenge,speedrunning,gameplay-mod"
       metadataWebsiteUrl: "https://github.com/OpenGOAL-Mods/OG-Daxter2/blob/main/README.md"
       skipMacOS: true
       skipLinux: true
