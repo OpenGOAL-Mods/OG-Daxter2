@@ -280,6 +280,7 @@
 
 ;; WARN: Function (method 10 effect-control) has a return type of none, but the expression builder found a return statement.
 (defmethod do-effect ((this effect-control) (arg0 symbol) (arg1 float) (arg2 int))
+  ;; (format 0 "do-effect ~A ~F ~D~%" arg0 arg1 arg2)
   (local-vars
     (sv-320 int)
     (sv-336 symbol)
@@ -350,7 +351,7 @@
       )
     (let ((v1-23 (symbol->string arg0)))
       (cond
-        ((and (= (-> v1-23 data 0) 101)
+        ((and (= (-> v1-23 data 0) 101) ;; effect-*
               (= (-> v1-23 data 1) 102)
               (= (-> v1-23 data 2) 102)
               (= (-> v1-23 data 3) 101)
@@ -373,7 +374,7 @@
            )
          )
         ((let ((v1-31 (symbol->string arg0)))
-           (and (= (-> v1-31 data 0) 103)
+           (and (= (-> v1-31 data 0) 103) ;; group-*
                 (= (-> v1-31 data 1) 114)
                 (= (-> v1-31 data 2) 111)
                 (= (-> v1-31 data 3) 117)
@@ -431,6 +432,9 @@
                  (let ((v1-55 (-> (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data s5-0)) quad)))
                    (set! (-> sv-384 quad) v1-55)
                    )
+                 (when (= (-> this process) *target*)
+                  (set! (-> sv-384 quad) (-> *target* root trans quad))
+                  )
                  ((the-as (function object object object object object object object object none) s2-1)
                   s1-0
                   s0-0
@@ -448,7 +452,7 @@
            )
          )
         ((let ((v1-58 (symbol->string arg0)))
-           (and (= (-> v1-58 data 0) 101)
+           (and (= (-> v1-58 data 0) 101) ;; event-*
                 (= (-> v1-58 data 1) 118)
                 (= (-> v1-58 data 2) 101)
                 (= (-> v1-58 data 3) 110)
@@ -617,6 +621,7 @@
   )
 
 (defmethod do-effect-for-surface ((this effect-control) (arg0 symbol) (arg1 float) (arg2 int) (arg3 basic) (arg4 pat-surface))
+  ;; (format 0 "do-effect-for-surface ~A ~F ~D ~A ~A~%" arg0 arg1 arg2 arg3 arg4)
   (local-vars
     (sv-64
       (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none)
