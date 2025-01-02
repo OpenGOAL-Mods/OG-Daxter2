@@ -339,21 +339,21 @@
            )
           )
         )
-      (let ((v1-97 (-> self parent 0 draw color-mult quad)))
-        (set! (-> self draw color-mult quad) v1-97)
-        )
-      (cond
-        ((and (focus-test? (ppointer->process (-> self parent)) light)
-              (nonzero? (-> (ppointer->process (-> self parent)) lightjak))
-              )
-         (set-vector! (-> self draw color-emissive) 0.1 0.4 1.0 0.5)
-         )
-        (else
-          (let ((a0-37 (-> self parent 0 draw color-emissive quad)))
-            (set! (-> self draw color-emissive quad) a0-37)
-            )
-          )
-        )
+      ;; (let ((v1-97 (-> self parent 0 draw color-mult quad)))
+      ;;   (set! (-> self draw color-mult quad) v1-97)
+      ;;   )
+      ;; (cond
+      ;;   ((and (focus-test? (ppointer->process (-> self parent)) light)
+      ;;         (nonzero? (-> (ppointer->process (-> self parent)) lightjak))
+      ;;         )
+      ;;    (set-vector! (-> self draw color-emissive) 0.1 0.4 1.0 0.5)
+      ;;    )
+      ;;   (else
+      ;;     (let ((a0-37 (-> self parent 0 draw color-emissive quad)))
+      ;;       (set! (-> self draw color-emissive quad) a0-37)
+      ;;       )
+      ;;     )
+      ;;   )
       (set! (-> self draw force-fade) (-> self parent 0 draw force-fade))
       (set! (-> self draw death-vertex-skip) (-> self parent 0 draw death-vertex-skip))
       (set! (-> self draw death-effect) (-> self parent 0 draw death-effect))
@@ -395,8 +395,14 @@
           ((target-powerjak-get-on target-darkjak-get-on target-lightjak-get-on)
             (set! (-> self offset trans y) (meters -1.5)) ;; up/down
             )
-          ((target-darkjak-get-off target-lightjak-get-off)
+          ((target-darkjak-get-off)
             (set! (-> self offset trans y) (meters -1.4)) ;; up/down
+            )
+          ((target-lightjak-freeze)
+            (set! (-> self offset trans y) (meters -0.5)) ;; up/down
+            )
+          ((target-lightjak-regen target-lightjak-shield target-lightjak-swoop target-lightjak-swoop-again target-lightjak-swoop-falling target-lightjak-get-off)
+            (set! (-> self offset trans y) (meters -1.5)) ;; up/down
             )
           ((target-flut-running-attack)
             (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
@@ -633,6 +639,7 @@
     )
   (set! (-> self draw shadow-ctrl) *target-shadow-control*)
   (logior! (-> self skel status) (joint-control-status sync-math blend-shape eye-anim))
+  (#when PC_PORT (set! (-> self skel postbind-function) process-drawable-joint-callback-pc))
   (set! (-> self draw light-index) (the-as uint 30))
   (let ((v1-14 (-> self node-list data)))
     (set! (-> v1-14 0 param0) (the-as (function cspace transformq none) cspace<-cspace+transformq!))

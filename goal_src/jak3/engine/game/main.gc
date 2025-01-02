@@ -1556,6 +1556,12 @@
           'target-darkjak-bomb0
           'target-darkjak-bomb1
           'target-lightjak-get-on
+          'target-lightjak-freeze
+          'target-lightjak-regen
+          'target-lightjak-shield
+          'target-lightjak-swoop
+          'target-lightjak-swoop-again
+          'target-lightjak-swoop-falling
           'target-lightjak-get-off
           ;; flut (leaper)
           'target-flut-air-attack

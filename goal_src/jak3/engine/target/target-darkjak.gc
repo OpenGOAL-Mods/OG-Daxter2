@@ -745,6 +745,13 @@
   (none)
   )
 
+(defun target-powerjak-choose-part-proc ((self target))
+  (if (focus-test? self indax)
+    (the process-drawable (ppointer->process (-> self sidekick)))
+    (the process-drawable self)
+    )
+  )
+
 (defbehavior target-darkjak-process target ()
   (local-vars (a3-3 vector))
   (cond
@@ -863,7 +870,7 @@
       (if (= (-> self invisible-interp) 0.0)
           (launch-particles
             (-> *part-id-table* 173)
-            (process-drawable-random-point! self (new 'stack-no-clear 'vector))
+            (process-drawable-random-point! (target-powerjak-choose-part-proc self) (new 'stack-no-clear 'vector))
             )
           )
       (cond
@@ -873,7 +880,7 @@
          (when (>= (- (-> *display* game-clock frame-counter) (-> self shock-effect-time)) (seconds 0.02))
            (set! (-> self shock-effect-time) (-> *display* game-clock frame-counter))
            (process-drawable-shock-wall-effect
-             self
+             (target-powerjak-choose-part-proc self)
              (-> *lightning-spec-id-table* 9)
              lightning-probe-callback
              (-> *part-id-table* 187)
@@ -884,7 +891,7 @@
          (when (>= (- (-> *display* game-clock frame-counter) (-> self shock-effect-time)) (seconds 0.02))
            (set! (-> self shock-effect-time) (-> *display* game-clock frame-counter))
            (process-drawable-shock-effect
-             self
+             (target-powerjak-choose-part-proc self)
              (-> *lightning-spec-id-table* 7)
              lightning-probe-callback
              (-> *part-id-table* 187)
@@ -907,6 +914,9 @@
         (set! (-> sk draw color-mult x) (lerp 1.0 0.4 f30-0))
         (set! (-> sk draw color-mult y) (lerp 1.0 0.1 f30-0))
         (set! (-> sk draw color-mult z) (lerp 1.0 3.0 f30-0))
+        (set! (-> *target* draw color-mult x) (lerp 1.0 0.4 f30-0))
+        (set! (-> *target* draw color-mult y) (lerp 1.0 0.1 f30-0))
+        (set! (-> *target* draw color-mult z) (lerp 1.0 3.0 f30-0))
         )
       )
     )

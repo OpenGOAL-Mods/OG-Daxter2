@@ -1013,7 +1013,7 @@
         (let ((scale1 (lerp 1.0 1.5 (* (-> *target* darkjak-interp) (-> *target* darkjak-giant-interp))))
               (scale2 (lerp 1.0 2.0 (* (-> *target* darkjak-interp) (-> *target* darkjak-giant-interp))))
               (scale3 (lerp 1.0 2.5 (* (-> *target* darkjak-interp) (-> *target* darkjak-giant-interp)))))
-          (format 0 "darkdax scales ~F ~F ~F~%" scale1 scale2 scale3)
+          ;; (format 0 "darkdax scales ~F ~F ~F~%" scale1 scale2 scale3)
           (scale-joints-xyz (the process-drawable (-> obj process)) (cspace-index-by-name (the process-drawable (-> obj process)) "upper_body") #t scale3 scale3 scale3)
           (scale-joints-xyz (the process-drawable (-> obj process)) (cspace-index-by-name (the process-drawable (-> obj process)) "Lelbow") #t scale1 0.7 scale1)
           (scale-joints-xyz (the process-drawable (-> obj process)) (cspace-index-by-name (the process-drawable (-> obj process)) "Relbow") #t scale1 0.7 scale1)

@@ -1127,6 +1127,9 @@
         (set! (-> sk draw color-mult x) (lerp 1.0 4.3 f30-0))
         (set! (-> sk draw color-mult y) (lerp 1.0 8.4 f30-0))
         (set! (-> sk draw color-mult z) (lerp 1.0 9.9 f30-0))
+        (set! (-> *target* draw color-mult x) (lerp 1.0 10.0 f30-0))
+        (set! (-> *target* draw color-mult y) (lerp 1.0 10.0 f30-0))
+        (set! (-> *target* draw color-mult z) (lerp 1.0 10.0 f30-0))
         )
       )
   
@@ -1206,12 +1209,12 @@
           (if (logtest? (-> *part-group-id-table* 176 flags) (sp-group-flag sp13))
               (part-tracker-spawn
                 part-tracker-subsampler
-                :to self
+                :to (target-powerjak-choose-part-proc self)
                 :group (-> *part-group-id-table* 176)
-                :target self
+                :target (target-powerjak-choose-part-proc self)
                 :mat-joint 6
                 )
-              (part-tracker-spawn part-tracker :to self :group (-> *part-group-id-table* 176) :target self :mat-joint 6)
+              (part-tracker-spawn part-tracker :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 176) :target (target-powerjak-choose-part-proc self) :mat-joint 6)
               )
           )
         (logclear! (-> self target-effect) (target-effect te1))
@@ -1378,7 +1381,7 @@
     (if (-> self lightjak shield)
         (send-event (ppointer->process (-> self lightjak shield)) 'open)
         (set! (-> self lightjak shield)
-              (process-spawn lightjak-shield :init lightjak-shield-init :name "lightjak-shield" :to self)
+              (process-spawn lightjak-shield :init lightjak-shield-init :name "lightjak-shield" :to (target-powerjak-choose-part-proc self))
               )
         )
     (when (time-elapsed? (-> self lightjak shield-count-time) (seconds 0.33))
@@ -1629,12 +1632,12 @@
             (if (logtest? (-> *part-group-id-table* 174 flags) (sp-group-flag sp13))
                 (part-tracker-spawn
                   part-tracker-subsampler
-                  :to self
+                  :to (target-powerjak-choose-part-proc self)
                   :group (-> *part-group-id-table* 174)
-                  :target self
+                  :target (target-powerjak-choose-part-proc self)
                   :mat-joint 6
                   )
-                (part-tracker-spawn part-tracker :to self :group (-> *part-group-id-table* 174) :target self :mat-joint 6)
+                (part-tracker-spawn part-tracker :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 174) :target (target-powerjak-choose-part-proc self) :mat-joint 6)
                 )
             )
           )
@@ -1677,17 +1680,17 @@
     (set! (-> self lightjak-interp) 1.0)
     (add-connection
       *part-engine*
-      self
+      (target-powerjak-choose-part-proc self)
       8
-      self
+      (target-powerjak-choose-part-proc self)
       650
       (new 'static 'vector :x 278.528 :y 643.072 :z 757.76 :w 163840.0)
       )
     (add-connection
       *part-engine*
-      self
+      (target-powerjak-choose-part-proc self)
       8
-      self
+      (target-powerjak-choose-part-proc self)
       650
       (new 'static 'vector :x -278.528 :y 643.072 :z 757.76 :w 163840.0)
       )
@@ -1707,12 +1710,12 @@
     (if (logtest? (-> *part-group-id-table* 175 flags) (sp-group-flag sp13))
         (part-tracker-spawn
           part-tracker-subsampler
-          :to self
+          :to (target-powerjak-choose-part-proc self)
           :group (-> *part-group-id-table* 175)
-          :target self
+          :target (target-powerjak-choose-part-proc self)
           :mat-joint 6
           )
-        (part-tracker-spawn part-tracker :to self :group (-> *part-group-id-table* 175) :target self :mat-joint 6)
+        (part-tracker-spawn part-tracker :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 175) :target (target-powerjak-choose-part-proc self) :mat-joint 6)
         )
     (cond
       ((logtest? arg0 (lightjak-stage regen))
@@ -2653,22 +2656,22 @@
     (if (logtest? (-> *part-group-id-table* 180 flags) (sp-group-flag sp13))
         (part-tracker-spawn
           part-tracker-subsampler
-          :to self
+          :to (target-powerjak-choose-part-proc self)
           :group (-> *part-group-id-table* 180)
-          :target self
+          :target (target-powerjak-choose-part-proc self)
           :mat-joint 19
           )
-        (part-tracker-spawn part-tracker :to self :group (-> *part-group-id-table* 180) :target self :mat-joint 19)
+        (part-tracker-spawn part-tracker :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 180) :target (target-powerjak-choose-part-proc self) :mat-joint 19)
         )
     (if (logtest? (-> *part-group-id-table* 180 flags) (sp-group-flag sp13))
         (part-tracker-spawn
           part-tracker-subsampler
-          :to self
+          :to (target-powerjak-choose-part-proc self)
           :group (-> *part-group-id-table* 180)
-          :target self
+          :target (target-powerjak-choose-part-proc self)
           :mat-joint 28
           )
-        (part-tracker-spawn part-tracker :to self :group (-> *part-group-id-table* 180) :target self :mat-joint 28)
+        (part-tracker-spawn part-tracker :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 180) :target (target-powerjak-choose-part-proc self) :mat-joint 28)
         )
     (set! (-> self control mod-surface) *roll-flip-mods*)
     (let ((f30-0 0.0))
@@ -2687,13 +2690,13 @@
        (set! (-> *launch-matrix* trans quad)
              (-> (vector<-cspace! (new 'stack-no-clear 'vector) (joint-node jakb-lod0-jg sk_lhand)) quad)
              )
-       (part-tracker-spawn part-tracker-subsampler :to self :group (-> *part-group-id-table* 181))
+       (part-tracker-spawn part-tracker-subsampler :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 181))
        )
       (else
         (set! (-> *launch-matrix* trans quad)
               (-> (vector<-cspace! (new 'stack-no-clear 'vector) (joint-node jakb-lod0-jg sk_lhand)) quad)
               )
-        (part-tracker-spawn part-tracker :to self :group (-> *part-group-id-table* 181))
+        (part-tracker-spawn part-tracker :to (target-powerjak-choose-part-proc self) :group (-> *part-group-id-table* 181))
         )
       )
     (cpad-set-buzz! (-> *cpad-list* cpads 0) 1 255 (seconds 0.5))
