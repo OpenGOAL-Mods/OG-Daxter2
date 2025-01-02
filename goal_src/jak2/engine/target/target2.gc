@@ -51,8 +51,8 @@
         (ja :num! (seek!))
         )
       (suspend-for (seconds 0.3)
-        (suspend)
-        (ja :num! (seek! (ja-aframe 19.0 0) 0.05))
+          (suspend)
+          (ja :num! (seek! (ja-aframe 19.0 0) 0.05))
         )
       (ja-channel-push! 1 (seconds 0.3))
       (ja-no-eval :group! jakb-painful-land-ja :num! (seek!) :frame-num (ja-aframe 40.0 0))
@@ -300,7 +300,7 @@
       (else
         (case message
           (('end-mode)
-           (go target-stance)
+           (go target-indax-start (the handle #f))
            )
           (('play-anim)
            (go target-grab (the-as symbol (-> block param 0)))
@@ -1200,7 +1200,7 @@
         (let ((s5-0 (rand-vu-int-range 30 600)))
           (ja :group! jakb-wall-hide-head-ja)
           (suspend-for s5-0
-            (gp-0)
+              (gp-0)
             )
           )
         (let ((f30-0 (rand-vu-float-range 0.5 1.5)))

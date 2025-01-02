@@ -95,6 +95,13 @@
   (none)
   )
 
+(defun target-darkjak-choose-part-proc ((self target))
+  (if (focus-test? self indax)
+    (the process-drawable (ppointer->process (-> self sidekick)))
+    (the process-drawable self)
+    )
+  )
+
 (defbehavior target-darkjak-process target ()
   (local-vars (gp-0 vector))
   (cond
@@ -227,14 +234,14 @@
                )
       (launch-particles
         (-> *part-id-table* 178)
-        (process-drawable-random-point! self (new 'stack-no-clear 'vector))
+        (process-drawable-random-point! (target-darkjak-choose-part-proc self) (new 'stack-no-clear 'vector))
         )
       (cond
         ((rand-vu-percent? 0.25)
          (when (>= (- (-> *display* game-clock frame-counter) (-> self shock-effect-time)) (seconds 0.02))
            (set! (-> self shock-effect-time) (-> *display* game-clock frame-counter))
            (process-drawable-shock-wall-effect
-             self
+             (target-darkjak-choose-part-proc self)
              (-> *lightning-spec-id-table* 8)
              lightning-probe-callback
              (-> *part-id-table* 179)
@@ -245,7 +252,7 @@
          (when (>= (- (-> *display* game-clock frame-counter) (-> self shock-effect-time)) (seconds 0.02))
            (set! (-> self shock-effect-time) (-> *display* game-clock frame-counter))
            (process-drawable-shock-effect
-             self
+             (target-darkjak-choose-part-proc self)
              (-> *lightning-spec-id-table* 6)
              lightning-probe-callback
              (-> *part-id-table* 179)
@@ -323,7 +330,7 @@
         (logclear! (-> self state-flags) (state-flags sf4))
         )
     (if (logtest? arg0 (darkjak-stage no-anim))
-        (go target-stance)
+        (go target-indax-start (the handle #f))
         )
     (set-setting! 'bg-r 'abs 0.1 0)
     (set-setting! 'bg-b 'abs 0.1 0)
@@ -333,7 +340,7 @@
         (target-falling-anim-trans)
         (+! s5-0 (- (current-time) (-> self clock old-frame-counter)))
         (if (>= s5-0 300)
-            (go target-falling #f)
+            (go target-indax-start (the handle #f))
             )
         (suspend)
         )
@@ -389,7 +396,7 @@
           2
           )
       )
-    (go target-stance)
+    (go target-indax-start (the handle #f))
     )
   :post (-> target-grab post)
   )
@@ -466,8 +473,8 @@
              (target-falling-anim-trans)
              (+! gp-0 (- (current-time) (-> self clock old-frame-counter)))
              (if (>= gp-0 300)
-                 (go target-falling #f)
-                 )
+                (go target-indax-start (the handle #f))
+                )
              (suspend)
              )
            )
@@ -582,7 +589,7 @@
     (label cfg-133)
     (vector-reset! (-> self control transv))
     ((-> target-darkjak-get-off exit))
-    (go target-stance)
+    (go target-indax-start (the handle #f))
     )
   :post (-> target-grab post)
   )
@@ -1936,7 +1943,7 @@
         )
       )
     (send-event *traffic-manager* 'increase-alert-level 4)
-    (go target-stance)
+    (go target-indax-start (the handle #f))
     )
   :post (-> target-grab post)
   )
