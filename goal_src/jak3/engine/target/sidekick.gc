@@ -8,6 +8,13 @@
 (declare-type sidekick process-drawable)
 (define-extern init-sidekick (function object :behavior sidekick))
 
+(defun get-sidekick () 
+  (when *target*
+    (return (the sidekick (ppointer->process (-> *target* sidekick))))
+    )
+  (the sidekick #f)
+  )
+
 ;; DECOMP BEGINS
 
 (defskelgroup skel-sidekick daxter daxter-lod0-jg -1
@@ -385,10 +392,10 @@
           ((target-grab)
             (set! (-> self offset trans y) (meters -2.1)) ;; up/down
             )
-          ((target-darkjak-get-on)
+          ((target-powerjak-get-on target-darkjak-get-on target-lightjak-get-on)
             (set! (-> self offset trans y) (meters -1.5)) ;; up/down
             )
-          ((target-darkjak-get-off)
+          ((target-darkjak-get-off target-lightjak-get-off)
             (set! (-> self offset trans y) (meters -1.4)) ;; up/down
             )
           ((target-flut-running-attack)

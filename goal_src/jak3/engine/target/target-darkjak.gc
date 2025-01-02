@@ -653,7 +653,7 @@
               pilot
               mech
               carry
-              indax
+              ;; indax
               teleporting
               )
             )
@@ -896,11 +896,19 @@
          )
         )
       )
-    (set-darkjak-texture-morph! (if (logtest? (-> self target-effect) (target-effect te6))
-                                    1.0
-                                    f30-0
-                                    )
-                                )
+    ;; (set-darkjak-texture-morph! (if (logtest? (-> self target-effect) (target-effect te6))
+    ;;                                 1.0
+    ;;                                 f30-0
+    ;;                                 )
+    ;;                             )
+    ;; instead just make dax purple
+    (let ((sk (get-sidekick)))
+      (when sk
+        (set! (-> sk draw color-mult x) (lerp 1.0 0.4 f30-0))
+        (set! (-> sk draw color-mult y) (lerp 1.0 0.1 f30-0))
+        (set! (-> sk draw color-mult z) (lerp 1.0 3.0 f30-0))
+        )
+      )
     )
   0
   (none)

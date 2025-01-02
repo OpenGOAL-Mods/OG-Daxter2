@@ -1549,11 +1549,14 @@
           'target-edge-grab-jump
           'target-edge-grab-off
           'target-jump-forward
-          ;; darkjak transitions
+          ;; darkjak/lightjak transitions
+          'target-powerjak-get-on
           'target-darkjak-get-on
           'target-darkjak-get-off
           'target-darkjak-bomb0
           'target-darkjak-bomb1
+          'target-lightjak-get-on
+          'target-lightjak-get-off
           ;; flut (leaper)
           'target-flut-air-attack
           'target-flut-air-attack-hit-ground

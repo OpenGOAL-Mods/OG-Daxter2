@@ -519,16 +519,24 @@
       (let* ((a2-5 (-> (scratchpad-object region-prim-area) region-enter-list gp-2))
              (s5-2 (-> a2-5 on-enter))
              )
-        (when s5-2
-          (countdown (v1-47 (-> (scratchpad-object region-prim-area) region-start-count))
-            (if (= a2-5 (-> (scratchpad-object region-prim-area) region-start-list v1-47))
-                (goto cfg-22)
-                )
+        (case (-> a2-5 id)
+          ((1064 1068)
+            ;; dax3 - ignore
             )
-          (script-eval
-            s5-2
-            :key a2-5
-            :vector (-> (scratchpad-object region-prim-area) region-enter-prim-list gp-2 bsphere)
+          (else
+            ;; vanilla
+            (when s5-2
+              (countdown (v1-47 (-> (scratchpad-object region-prim-area) region-start-count))
+                (if (= a2-5 (-> (scratchpad-object region-prim-area) region-start-list v1-47))
+                    (goto cfg-22)
+                    )
+                )
+              (script-eval
+                s5-2
+                :key a2-5
+                :vector (-> (scratchpad-object region-prim-area) region-enter-prim-list gp-2 bsphere)
+                )
+              )
             )
           )
         )
@@ -561,13 +569,21 @@
     (let* ((a2-7 (-> (scratchpad-object region-prim-area) region-inside-list gp-4))
            (s5-4 (-> a2-7 on-inside))
            )
-      (if s5-4
-          (script-eval
-            s5-4
-            :key a2-7
-            :vector (-> (scratchpad-object region-prim-area) region-inside-prim-list gp-4 bsphere)
+      (case (-> a2-7 id)
+        ((1064 1068)
+          ;; dax3 - ignore
+          )
+        (else
+          ;; vanilla
+          (if s5-4
+            (script-eval
+              s5-4
+              :key a2-7
+              :vector (-> (scratchpad-object region-prim-area) region-inside-prim-list gp-4 bsphere)
+              )
             )
           )
+        )
       )
     )
   0

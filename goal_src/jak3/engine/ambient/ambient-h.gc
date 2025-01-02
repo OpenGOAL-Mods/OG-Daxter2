@@ -885,9 +885,9 @@
                             :channel (gui-channel message)
                             :flags (talker-flags tf0)
                             :speech #x51
-                            :text-duration (seconds 5)
+                            ;; :text-duration (seconds 5)
                             :neg #x1
-                            :text-message (text-id text-012c)
+                            ;; :text-message (text-id text-012c)
                             :on-close #f
                             :camera #f
                             )

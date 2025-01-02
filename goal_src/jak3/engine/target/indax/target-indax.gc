@@ -660,6 +660,8 @@
       (remove-exit)
       (go target-indax-walk)
       )
+    (if (want-to-powerjak?)
+      (go target-powerjak-get-on))
     ;; og:preserve-this - High FPS Fix
     (if (and (recently-pressed? x)
              (can-jump? #f)
@@ -759,6 +761,8 @@
       (remove-exit)
       (go target-indax-stance)
       )
+    (if (want-to-powerjak?)
+      (go target-powerjak-get-on))  
     ;; og:preserve-this - High FPS Fix
     (if (and (recently-pressed? x)
              (can-jump? #f)
@@ -1517,7 +1521,46 @@
         )
     (go target-indax-stance)
     )
-  :post target-post
+  :trans (behavior ()
+    (when (and (recently-pressed? x)
+             (can-jump? #f)
+             )
+        (cond
+          ((and (focus-test? self dark)
+                   (nonzero? (-> self darkjak))
+                   (logtest? (-> self darkjak stage) (darkjak-stage bomb1))
+                   )
+            (set! (-> self control unknown-sound-id00)
+                  (add-process *gui-control* self (gui-channel jak) (gui-action queue) "darkbom1" -99.0 0)
+                  )
+            ;; (ja-no-eval :group! jakb-darkjak-attack-ice-ja :num! (seek! (ja-aframe 7.0 0)) :frame-num (ja-aframe 0.0 0))
+            ;; (until (ja-done? 0)
+            ;;   (suspend)
+            ;;   (ja :num! (seek! (ja-aframe 7.0 0)))
+            ;;   )
+            (go target-darkjak-bomb1 
+              (-> *TARGET-bank* attack-jump-height-min)
+              (-> *TARGET-bank* attack-jump-height-max)
+              )
+            )
+          (else
+            (go
+              target-indax-jump
+              (-> *TARGET-bank* indax-jump-height-min)
+              (-> *TARGET-bank* indax-jump-height-max)
+              (the-as surface #f)
+              )
+            )
+          )
+        )
+    (when (and (recently-pressed? circle)
+             (can-feet? #t)
+             )
+        (go target-indax-attack)
+        )
+    (none)
+    )
+  :post target-indax-post
   )
 
 (defstate target-indax-get-off (target)

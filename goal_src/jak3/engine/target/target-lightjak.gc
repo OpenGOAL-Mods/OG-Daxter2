@@ -714,7 +714,7 @@
                                  pilot
                                  mech
                                  carry
-                                 indax
+                                ;;  indax
                                  teleporting
                                  )
                                )
@@ -740,7 +740,7 @@
                                  mech
                                  dark
                                  carry
-                                 indax
+                                ;;  indax
                                  teleporting
                                  )
                                )
@@ -1003,7 +1003,7 @@
               mech
               dark
               carry
-              indax
+              ;; indax
               teleporting
               )
             )
@@ -1121,6 +1121,15 @@
 
 (defbehavior target-lightjak-do-effect target ()
   (let ((f30-0 (-> self lightjak-interp)))
+    ;; make dax white/blue
+    (let ((sk (get-sidekick)))
+      (when sk
+        (set! (-> sk draw color-mult x) (lerp 1.0 4.3 f30-0))
+        (set! (-> sk draw color-mult y) (lerp 1.0 8.4 f30-0))
+        (set! (-> sk draw color-mult z) (lerp 1.0 9.9 f30-0))
+        )
+      )
+  
     (cond
       ((< 0.0 f30-0)
        (logior! (-> self target-effect) (target-effect te1))
