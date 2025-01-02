@@ -289,7 +289,7 @@
                 )
            (or (-> self board latch?) (= (-> *setting-control* user-current board) 'force))
            )
-       (not (focus-test? self dead hit grabbed in-head edge-grab pole flut tube board pilot mech indax teleporting))
+       (not (focus-test? self dead hit grabbed in-head edge-grab pole flut tube board pilot mech teleporting))
        (or (zero? (-> self board)) (time-elapsed? (-> self board board-time) (seconds 0.5)))
        (not (logtest? (target-flags prevent-board invisible) (-> self target-flags)))
        (< (-> self board board-time) (-> self control list-time-on-ground))

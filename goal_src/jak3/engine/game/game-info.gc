@@ -465,8 +465,18 @@
     (('game 'boot)
      (+! (-> this task-counter) 1)
      (reset! (-> *display* total-game-clock))
-     (set! (-> this features) (game-feature sidekick darkjak darkjak-bomb0 darkjak-bomb1))
-     (set! (-> this debug-features) (game-feature))
+     (cond
+      (*debug-segment*
+        (set! (-> this secrets) (game-secrets endless-dark endless-light))
+        (set! (-> this features) (game-feature sidekick board board-launch board-zap board-trail darkeco darkjak darkjak-smack darkjak-bomb0 darkjak-bomb1 darkjak-tracking darkjak-invinc lighteco lightjak lightjak-regen lightjak-swoop lightjak-freeze lightjak-shield))
+        (set! (-> this debug-features) (game-feature sidekick board board-launch board-zap board-trail darkeco darkjak darkjak-smack darkjak-bomb0 darkjak-bomb1 darkjak-tracking darkjak-invinc lighteco lightjak lightjak-regen lightjak-swoop lightjak-freeze lightjak-shield))
+        )
+      (else
+        (set! (-> this secrets) (game-secrets))
+        (set! (-> this features) (game-feature sidekick))
+        (set! (-> this debug-features) (game-feature sidekick))
+        )
+      )
      (set! (-> this old-features) (game-feature))
      (set! (-> this items) (game-items))
      (set! (-> this debug-items) (game-items))
@@ -474,7 +484,6 @@
      (set! (-> this vehicles) (game-vehicles))
      (set! (-> this debug-vehicles) (game-vehicles))
      (set! (-> this old-vehicles) (game-vehicles))
-     (set! (-> this secrets) (game-secrets))
      (set! (-> this purchase-secrets) (game-secrets))
      (set! (-> this current-vehicle) (vehicle-type-u8 vt27))
      (set-continue!

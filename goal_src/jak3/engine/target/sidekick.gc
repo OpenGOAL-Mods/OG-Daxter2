@@ -391,6 +391,27 @@
           ((target-darkjak-get-off)
             (set! (-> self offset trans y) (meters -1.4)) ;; up/down
             )
+          ((target-flut-running-attack)
+            (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
+            (set! (-> self offset trans z) (meters -1.0)) ;; back/forward relative
+            )
+          ((target-flut-walk)
+            (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
+            (set! (-> self offset trans y) (meters -0.7)) ;; up/down
+
+            (let ((flut-run-pct 0.0))
+              (dotimes (idx (-> *target* skel active-channels))
+                (when (string= (-> *target* skel root-channel idx frame-group name) "jakb-flut-run")
+                  (set! flut-run-pct (/ (the float (-> *target* skel root-channel idx inspector-amount)) 255.0))))
+              ;; shift proportional to flut-run channel
+              (+! (-> self offset trans y) (* flut-run-pct (meters 0.3))) ;; up/down
+              (set! (-> self offset trans z) (* flut-run-pct (meters -0.7))) ;; back/forward relative
+              )
+            )
+          ((target-flut-air-attack target-flut-air-attack-hit-ground target-flut-double-jump target-flut-eject target-flut-falling target-flut-get-on target-flut-get-off target-flut-get-off-jump target-flut-grab target-flut-hit target-flut-hit-ground target-flut-jump target-flut-run-wild target-flut-kanga-catch target-flut-stance target-flut-start target-flut-walk)
+            (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
+            (set! (-> self offset trans y) (meters -0.7)) ;; up/down
+            )
           )
         )
       (cond

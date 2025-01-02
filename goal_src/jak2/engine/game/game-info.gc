@@ -355,12 +355,17 @@
     (('game)
      (+! (-> this task-counter) 1)
      (reset! (-> *display* total-game-clock))
-     (set! (-> this features) (game-feature sidekick))
-     (set! (-> this debug-features) (game-feature sidekick))
-    ;;  (set! (-> this debug-features) (game-feature board darkjak darkjak-bomb0 darkjak-bomb1 darkjak-giant))
-     (if *debug-segment*
-      (set! (-> this secrets) (game-secrets endless-dark))
-      (set! (-> this secrets) (game-secrets))
+     (cond
+      (*debug-segment*
+        (set! (-> this secrets) (game-secrets endless-dark))
+        (set! (-> this features) (game-feature sidekick board darkjak darkjak-bomb0 darkjak-bomb1 darkjak-giant darkjak-invinc))
+        (set! (-> this debug-features) (game-feature sidekick board darkjak darkjak-bomb0 darkjak-bomb1 darkjak-giant darkjak-invinc))
+        )
+      (else
+        (set! (-> this secrets) (game-secrets))
+        (set! (-> this features) (game-feature sidekick))
+        (set! (-> this debug-features) (game-feature sidekick))
+        )
       )
      (set! (-> this purchase-secrets) (game-secrets))
      (set-continue!

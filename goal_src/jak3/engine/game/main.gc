@@ -1471,7 +1471,6 @@
           ;; give daxter a ground pound attack
           'target-flop
           'target-flop-hit-ground
-          'target-hit-ground
           'target-duck-high-jump
           'target-duck-high-jump-jump
           ;; misc
@@ -1506,7 +1505,9 @@
           'target-board-stance
           'target-board-start
           'target-board-trickx
+          'target-board-tricky
           'target-board-turn-to
+          'target-board-turn-around
           'target-board-wall-kick
           ;; guns
           ;; 'target-gun-stance
@@ -1553,10 +1554,35 @@
           'target-darkjak-get-off
           'target-darkjak-bomb0
           'target-darkjak-bomb1
-          'target-darkjak-giant
+          ;; flut (leaper)
+          'target-flut-air-attack
+          'target-flut-air-attack-hit-ground
+          'target-flut-double-jump
+          'target-flut-eject
+          'target-flut-falling
+          'target-flut-get-on
+          'target-flut-get-off
+          'target-flut-get-off-jump
+          'target-flut-grab
+          'target-flut-hit
+          'target-flut-hit-ground
+          'target-flut-jump
+          'target-flut-run-wild
+          'target-flut-kanga-catch
+          'target-flut-running-attack
+          'target-flut-stance
+          'target-flut-start
+          'target-flut-walk
           )
           ;; do nothing
           ;; (format 0 "no indax event while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name))
+          )
+        (('target-hit-ground)
+          (when (and (= (-> *target* skel active-channels) 1)
+                      (string= (-> *target* skel root-channel 0 frame-group name) "jakb-jump-land"))
+            (format 0 "sending change-mode indax in target-hit-ground with only jakb-jump-land channel ~%")
+            (send-event *target* 'change-mode 'indax #f)
+            )
           )
         (else
           ;; force to indax mode

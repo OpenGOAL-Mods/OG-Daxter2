@@ -128,7 +128,7 @@
   (text-0080 #x0080)
   (text-0081 #x0081)
   (press-triangle-to-talk #x0082)
-  (text-0083 #x0083)
+  (text-0083 #x0083) ;; press-triangle-to-use
   (text-0084 #x0084)
   (text-0085 #x0085)
   (text-0086 #x0086)
