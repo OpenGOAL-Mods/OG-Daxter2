@@ -1127,9 +1127,6 @@
         (set! (-> sk draw color-mult x) (lerp 1.0 4.3 f30-0))
         (set! (-> sk draw color-mult y) (lerp 1.0 8.4 f30-0))
         (set! (-> sk draw color-mult z) (lerp 1.0 9.9 f30-0))
-        (set! (-> *target* draw color-mult x) (lerp 1.0 10.0 f30-0))
-        (set! (-> *target* draw color-mult y) (lerp 1.0 10.0 f30-0))
-        (set! (-> *target* draw color-mult z) (lerp 1.0 10.0 f30-0))
         )
       )
   

@@ -79,8 +79,14 @@
                     )
                 'jakb
                 )
-               ((string= (-> this name) "jakc-highres")
+               ((or (string= (-> this name) "jakc-highres")
+                    (string= (-> this name) "jakc-feet")
+                    )
                 'jakc
+                )
+              (else
+                (format 0 "non-jak scene actor? ~S~%" (-> this name))
+                #f
                 )
                )
              )
@@ -135,7 +141,8 @@
                 (if (nonzero? (-> this shadow-values))
                     (send-event (ppointer->process s4-0) 'shadow-values (* (-> this shadow-values) 8))
                     )
-                (if (and s4-0 (not (logtest? (-> this flags) 1)) (nonzero? (-> (the-as process-drawable (-> s4-0 0)) draw)))
+                (if (or s1-0
+                        (and s4-0 (not (logtest? (-> this flags) 1)) (nonzero? (-> (the-as process-drawable (-> s4-0 0)) draw))))
                     (logior! (-> (the-as process-drawable (-> s4-0 0)) draw status) (draw-control-status no-draw-bounds))
                     )
                 (if (-> this shadow-volume-joint)

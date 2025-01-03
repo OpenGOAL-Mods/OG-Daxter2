@@ -536,7 +536,7 @@
                    (persist-with-delay *setting-control* 'lightjak (seconds 0.1) 'lightjak #f 0.0 0)
                    (persist-with-delay *setting-control* 'darkjak (seconds 0.1) 'darkjak #f 0.0 0)
                    (persist-with-delay *setting-control* 'board (seconds 0.1) 'board #f 0.0 0)
-                   (not (logtest? (focus-status in-head edge-grab pole flut tube light board pilot mech dark indax)
+                   (not (logtest? (focus-status in-head edge-grab pole flut tube light board pilot mech dark) ;; indax)
                                   (-> *target* focus-status)
                                   )
                         )

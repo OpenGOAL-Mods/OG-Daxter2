@@ -213,12 +213,15 @@
   (cond
     ((= (-> self invisible-interp) 0.0)
      (logclear! (-> self draw status) (draw-control-status force-fade))
+     (logclear! (-> (get-sidekick) draw status) (draw-control-status force-fade))
      )
     (else
       (logior! (-> self draw status) (draw-control-status force-fade))
       (set! (-> self draw force-fade)
-            (the-as uint (the int (lerp-scale 128.0 16.0 (-> self invisible-interp) 0.0 1.0)))
-            )
+            (the-as uint (the int (lerp-scale 128.0 8.0 (-> self invisible-interp) 0.0 1.0))))
+      (logior! (-> (get-sidekick) draw status) (draw-control-status force-fade))
+      (set! (-> (get-sidekick) draw force-fade)
+            (the-as uint (the int (lerp-scale 128.0 8.0 (-> self invisible-interp) 0.0 1.0))))
       )
     )
   0

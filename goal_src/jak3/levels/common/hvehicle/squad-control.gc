@@ -324,7 +324,10 @@
                )
          )
     (when s5-0
-      (set! (-> arg0 position quad) (-> (get-trans (the-as process-focusable s5-0) 3) quad))
+      (if (focus-test? *target* indax)
+        (set! (-> arg0 position quad) (-> (get-trans (the-as process-focusable s5-0) 0) quad))
+        (set! (-> arg0 position quad) (-> (get-trans (the-as process-focusable s5-0) 3) quad))
+        )
       (set! (-> arg0 velocity quad) (-> (get-transv (the-as process-focusable s5-0)) quad))
       )
     )

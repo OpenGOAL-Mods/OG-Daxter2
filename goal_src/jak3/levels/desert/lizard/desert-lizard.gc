@@ -751,7 +751,7 @@
                     )
            (let ((gp-7 (the-as wvehicle (handle->process (-> *target* pilot vehicle)))))
              (when gp-7
-               (external-target-spawn (-> gp-7 root trans) (-> gp-7 root quat) gp-7 #f (manipy-options mo2 mo3))
+              ;;  (external-target-spawn (-> gp-7 root trans) (-> gp-7 root quat) gp-7 #f (manipy-options mo2 mo3))
                (let ((a1-15 (new 'stack-no-clear 'event-message-block)))
                  (set! (-> a1-15 from) (process->ppointer self))
                  (set! (-> a1-15 num-params) 2)

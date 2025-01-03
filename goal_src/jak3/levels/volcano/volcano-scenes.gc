@@ -244,7 +244,11 @@
               :sfx-volume -1.0
               :music-delay 1500.0
               :on-running '(begin (sound-play-loop "volcano-mov-amb") (sound-play-loop "lava-mov-amb"))
-              :on-complete #f
+              :on-complete '(begin
+                (task-close! "volcano-darkeco-indax-1")
+                (want-continue "volcano-post-indax-1")
+                (talker-spawn "dax619")
+                )
               )
             )
 

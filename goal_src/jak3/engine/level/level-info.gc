@@ -18294,17 +18294,18 @@
         :camera-rot (new 'static 'array int16 9 #x1bf1 0 #x7ce6 -10793 #x7878 #x96e -30096 -11062 #x1a4d)
         :on-goto '(begin
            (task-close! "volcano-darkeco-indax-1-introduction")
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "volcano-post-indax-1"
-             '(begin
-                (task-close! "volcano-darkeco-indax-1")
-                (want-continue "volcano-post-indax-1")
-                (talker-spawn "dax619")
-                )
-             )
+          ;; dax3 - moved to on-complete for volcano-indax-1-res / scene-stage-187 
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "volcano-post-indax-1"
+          ;;    '(begin
+          ;;       (task-close! "volcano-darkeco-indax-1")
+          ;;       (want-continue "volcano-post-indax-1")
+          ;;       (talker-spawn "dax619")
+          ;;       )
+          ;;    )
            )
         :vis-nick 'volcanoa
         :vehicle-type #x1b
@@ -18342,40 +18343,40 @@
         :quat (new 'static 'vector4h :data (new 'static 'array int16 4 0 -31790 0 #x1ef6))
         :camera-rot (new 'static 'array int16 9 -32576 0 #xdb2 -507 #x7ea0 -4734 -3470 -4761 -32229)
         :on-goto '(begin
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "volcano-post-indax-1"
-             '(begin
-                (task-close! "volcano-darkeco-indax-1")
-                (want-continue "volcano-post-indax-1")
-                (talker-spawn "dax619")
-                (setting-pers mode-name mode 'cam-really-fixed time (seconds (new 'static 'bfloat :data 0.1)))
-                (setting-pers
-                  interp-time
-                  value
-                  (secondsf (new 'static 'bfloat :data 0.4))
-                  mode
-                  'hi
-                  time
-                  (seconds (new 'static 'bfloat :data 0.3))
-                  )
-                (setting-pers
-                  string-startup-vector
-                  mode
-                  'abs
-                  value
-                  (static-vectorm
-                    (new 'static 'bfloat :data -0.5607)
-                    (new 'static 'bfloat :data -0.0538)
-                    (new 'static 'bfloat :data -0.8262)
-                    )
-                  time
-                  (seconds (new 'static 'bfloat :data 0.25))
-                  )
-                )
-             )
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "volcano-post-indax-1"
+          ;;    '(begin
+          ;;       (task-close! "volcano-darkeco-indax-1")
+          ;;       (want-continue "volcano-post-indax-1")
+          ;;       (talker-spawn "dax619")
+          ;;       (setting-pers mode-name mode 'cam-really-fixed time (seconds (new 'static 'bfloat :data 0.1)))
+          ;;       (setting-pers
+          ;;         interp-time
+          ;;         value
+          ;;         (secondsf (new 'static 'bfloat :data 0.4))
+          ;;         mode
+          ;;         'hi
+          ;;         time
+          ;;         (seconds (new 'static 'bfloat :data 0.3))
+          ;;         )
+          ;;       (setting-pers
+          ;;         string-startup-vector
+          ;;         mode
+          ;;         'abs
+          ;;         value
+          ;;         (static-vectorm
+          ;;           (new 'static 'bfloat :data -0.5607)
+          ;;           (new 'static 'bfloat :data -0.0538)
+          ;;           (new 'static 'bfloat :data -0.8262)
+          ;;           )
+          ;;         time
+          ;;         (seconds (new 'static 'bfloat :data 0.25))
+          ;;         )
+          ;;       )
+          ;;    )
            (want-continue "volcano-indax-1")
            )
         :vis-nick 'volcanoa
@@ -18450,7 +18451,7 @@
         :quat (new 'static 'vector4h :data (new 'static 'array int16 4 0 -17029 0 -27992))
         :camera-rot (new 'static 'array int16 9 -27910 0 #x4308 -2503 #x7e9d -4069 -16976 -4780 -27612)
         :on-goto '(begin
-           (send-event *target* 'manipy 'auto "volcano-post-indax-2")
+          ;;  (send-event *target* 'manipy 'auto "volcano-post-indax-2")
            (want-continue "volcano-post-indax-2")
            (talker-spawn "dax613")
            )
@@ -18996,12 +18997,13 @@
         :camera-rot (new 'static 'array int16 9 -32763 0 #x1ad -167 #x75b1 -12874 -393 -12874 -30125)
         :on-goto '(begin
            (task-close! "factory-assault-indax-1-introduction")
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "factory-pre-indax-1"
-             '(cond
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "factory-pre-indax-1"
+          ;;   '
+             (cond
                 ((entity-status? "fac-switch-1" subtask-complete)
                  (task-close! "factory-assault-indax-1")
                  (want-continue "factory-pre-indax-1")
@@ -19012,7 +19014,7 @@
                   (want-continue "factory-pre-indax-1")
                   )
                 )
-             )
+          ;;    )
            )
         :vis-nick 'factoryc
         :vehicle-type #x1b
@@ -19051,12 +19053,13 @@
         :camera-rot (new 'static 'array int16 9 #x178 0 -32763 #x2947 #x7925 #x79 #x7922 -10567 #x165)
         :on-goto '(begin
            (task-close! "factory-assault-indax-2-introduction")
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "factory-pre-indax-2"
-             '(cond
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "factory-pre-indax-2"
+          ;;    '
+              (cond
                 ((entity-status? "fac-switch-2" subtask-complete)
                  (task-close! "factory-assault-indax-2")
                  (want-continue "factory-pre-indax-2")
@@ -19067,7 +19070,7 @@
                   (want-continue "factory-pre-indax-2")
                   )
                 )
-             )
+          ;;    )
            )
         :vis-nick 'factoryc
         :vehicle-type #x1b
@@ -19087,13 +19090,15 @@
         :quat (new 'static 'vector4h :data (new 'static 'array int16 4 0 #x4e5f 0 #x652e))
         :camera-rot (new 'static 'array int16 9 -4721 0 #x7ea6 -9731 #x7a15 -1415 -30928 -9833 -4502)
         :on-goto '(begin
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "factory-pre-indax-2"
-             '(begin (task-close! "factory-assault-indax-2") (want-continue "factory-pre-indax-2") (talker-spawn "dax624"))
-             )
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "factory-pre-indax-2"
+          ;;    '(begin 
+                  (task-close! "factory-assault-indax-2") (want-continue "factory-pre-indax-2") (talker-spawn "dax624")
+          ;;    )
+          ;;  )
            )
         :vis-nick 'factoryc
         :vehicle-type #x1b
@@ -19150,12 +19155,13 @@
         :camera-rot (new 'static 'array int16 9 #x7f8c 0 #xa9c -914 #x787e #x2afe -2555 -11045 #x7816)
         :on-goto '(begin
            (task-close! "factory-assault-indax-3-introduction")
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "factory-post-indax-3"
-             '(cond
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "factory-post-indax-3"
+          ;;    '
+              (cond
                 ((entity-status? "fac-switch-3" subtask-complete)
                  (task-close! "factory-assault-indax-3")
                  (want-continue "factory-post-indax-3")
@@ -19166,7 +19172,7 @@
                   (want-continue "factory-pre-indax-3")
                   )
                 )
-             )
+            ;;  )
            )
         :vis-nick 'factoryc
         :vehicle-type #x1b
@@ -19205,12 +19211,13 @@
         :camera-rot (new 'static 'array int16 9 #x6864 0 #x4a0b -6389 #x787e #x232f -17848 -11045 #x6246)
         :on-goto '(begin
            (task-close! "factory-assault-indax-4-introduction")
-           (send-event
-             *target*
-             'manipy
-             'auto
-             "factory-post-indax-4"
-             '(cond
+          ;;  (send-event
+          ;;    *target*
+          ;;    'manipy
+          ;;    'auto
+          ;;    "factory-post-indax-4"
+          ;;    '
+              (cond
                 ((entity-status? "fac-switch-4" subtask-complete)
                  (task-close! "factory-assault-indax-4")
                  (want-continue "factory-post-indax-4")
@@ -19221,7 +19228,7 @@
                   (want-continue "factory-pre-indax-4")
                   )
                 )
-             )
+            ;;  )
            )
         :vis-nick 'factoryc
         :vehicle-type #x1b

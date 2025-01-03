@@ -911,12 +911,9 @@
     ;; instead just make dax purple
     (let ((sk (get-sidekick)))
       (when sk
-        (set! (-> sk draw color-mult x) (lerp 1.0 0.4 f30-0))
-        (set! (-> sk draw color-mult y) (lerp 1.0 0.1 f30-0))
-        (set! (-> sk draw color-mult z) (lerp 1.0 3.0 f30-0))
-        (set! (-> *target* draw color-mult x) (lerp 1.0 0.4 f30-0))
-        (set! (-> *target* draw color-mult y) (lerp 1.0 0.1 f30-0))
-        (set! (-> *target* draw color-mult z) (lerp 1.0 3.0 f30-0))
+        (set! (-> sk draw color-mult x) (lerp 1.0 4.0 f30-0))
+        (set! (-> sk draw color-mult y) (lerp 1.0 1.0 f30-0))
+        (set! (-> sk draw color-mult z) (lerp 1.0 10.0 f30-0))
         )
       )
     )

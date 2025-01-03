@@ -129,7 +129,8 @@
                  )
        (-> *setting-control* user-current gun)
        (or (not (logtest? (-> arg0 control current-surface flags) (surface-flag duck))) (can-exit-duck? arg0))
-       (or (not (focus-test? arg0 pilot)) (-> arg0 pilot gun?))
+      ;;  (or (not (focus-test? arg0 pilot)) (-> arg0 pilot gun?))
+       (and (focus-test? arg0 pilot) (-> arg0 pilot gun?)) ;; dax3
        (not (and (-> arg0 next-state) (let ((v1-29 (-> arg0 next-state name)))
                                         (or (= v1-29 'target-powerjak-get-on) (= v1-29 'target-lightjak-get-on))
                                         )
@@ -282,6 +283,7 @@
       (set! (-> self gun blue-whine-sound-id) (new-sound-id))
       )
   (sound-play "gun-takeout")
+  (logclear! (-> (the gun (ppointer->process (-> self gun gun))) draw status) (draw-control-status no-draw))
   (set! (-> self gun charge-ammo) 0.0)
   (set! (-> self gun charge-start-time) 0)
   (set! (-> self gun top-anim-tilt-up) 0.0)
@@ -435,6 +437,7 @@
               (!= arg0 'fast-exit)
               )
          (sound-play "gun-putaway")
+         (logior! (-> (the gun (ppointer->process (-> self gun gun))) draw status) (draw-control-status no-draw))
          (cond
            ((focus-test? self pilot-riding)
             (case (gun->eco (-> self gun gun-type))

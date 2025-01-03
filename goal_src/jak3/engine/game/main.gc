@@ -1485,6 +1485,7 @@
           'target-pilot-get-off
           'target-pilot-hit
           'target-pilot-impact
+          'target-pilot-daxter-perch
           ;; jetboard
           'target-board-clone-anim
           'target-board-duck-stance
@@ -1555,6 +1556,7 @@
           'target-darkjak-get-off
           'target-darkjak-bomb0
           'target-darkjak-bomb1
+          'target-invisible-get-on
           'target-lightjak-get-on
           'target-lightjak-freeze
           'target-lightjak-regen
@@ -1582,6 +1584,9 @@
           'target-flut-stance
           'target-flut-start
           'target-flut-walk
+          ;; warp
+          'target-warp-in
+          'target-warp-out
           )
           ;; do nothing
           ;; (format 0 "no indax event while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name))

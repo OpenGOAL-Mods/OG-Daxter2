@@ -171,7 +171,7 @@
            (set! (-> v1-8 message) 'query)
            (set! (-> v1-8 param 0) (the-as uint 'mode))
            (let ((v1-9 (send-event-function arg0 v1-8)))
-             (and (or (= v1-9 #f) (= v1-9 'board)) (or (logtest? (vehicle-flag waiting-for-player) (-> this v-flags))
+             (and (or (= v1-9 #f) (= v1-9 'board) (= v1-9 'indax)) (or (logtest? (vehicle-flag waiting-for-player) (-> this v-flags))
                                                        (-> *setting-control* user-current vehicle-hijacking)
                                                        )
                   )

@@ -1617,7 +1617,7 @@
               )
          (when (and v1-1
                     (= (-> v1-1 type) target)
-                    (not (focus-test? v1-1 indax))
+                    ;; (not (focus-test? v1-1 indax))
                     (< (if *target*
                            (vector-vector-distance (-> self root trans) (-> *target* control trans))
                            4096000.0
