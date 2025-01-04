@@ -1438,8 +1438,23 @@
         )
 
     ;; MOD STUFF
-    ;; switch in/out of daxter states
     (when *target*
+      ;; turn off invis wall in stadium
+      (let ((wb (process-by-ename "wstd-blocker-1")))
+        (when wb (send-event wb 'off)))
+
+      ;; hack to close task after robo skip
+      (let ((pb (process-by-ename "prebot-2")))
+        (when (and pb
+                  (name= (-> pb next-state name) 'beaten)
+                  (nonzero? (-> *task-manager-engine* length))
+                  (= (-> *task-manager-engine* data 0 param1 type) task-manager-prebot)
+                  )
+          (task-close! "mine-boss-resolution")
+          )
+        )
+      
+      ;; switch in/out of daxter states
       (case (-> *target* state name)
         ((#f
           'target-indax-attack
@@ -1594,14 +1609,14 @@
         (('target-hit-ground)
           (when (and (= (-> *target* skel active-channels) 1)
                       (string= (-> *target* skel root-channel 0 frame-group name) "jakb-jump-land"))
-            (format 0 "sending change-mode indax in target-hit-ground with only jakb-jump-land channel ~%")
+            (when *debug-segment* (format 0 "sending change-mode indax in target-hit-ground with only jakb-jump-land channel ~%"))
             (send-event *target* 'change-mode 'indax #f)
             )
           )
         (else
           ;; force to indax mode
           (when (not (logtest? (-> *kernel-context* prevent-from-run) (process-mask movie)))
-            (format 0 "sending change-mode indax while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name))
+            (when *debug-segment* (format 0 "sending change-mode indax while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name)))
             (send-event *target* 'change-mode 'indax #f)
             )
           )

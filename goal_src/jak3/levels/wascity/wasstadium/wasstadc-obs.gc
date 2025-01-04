@@ -2132,11 +2132,11 @@
         (send-event (-> gp-0 extra process) 'go-pos 0)
         )
       )
-    (let ((v1-10 (entity-by-name "wstd-blocker-1")))
-      (if v1-10
-          (send-event (-> v1-10 extra process) 'on)
-          )
-      )
+    ;; (let ((v1-10 (entity-by-name "wstd-blocker-1")))
+    ;;   (if v1-10
+    ;;       (send-event (-> v1-10 extra process) 'on)
+    ;;       )
+    ;;   )
     ;; (until (process-grab? *target* #f)
     ;;   (suspend)
     ;;   )

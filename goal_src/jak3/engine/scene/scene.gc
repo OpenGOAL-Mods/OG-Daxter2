@@ -84,7 +84,7 @@
                     )
                 'jakc
                 )
-              (else
+               (else
                 (format 0 "non-jak scene actor? ~S~%" (-> this name))
                 #f
                 )

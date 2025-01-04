@@ -6835,6 +6835,11 @@
     arg0
     '(main-menu
        "Popup"
+       (function "Give Stuff" #f ,(lambda () 
+                                    (set! (-> *game-info* secrets) (game-secrets endless-dark endless-light))
+                                    (set! (-> *game-info* features) (game-feature sidekick board board-launch board-zap board-trail darkeco darkjak darkjak-smack darkjak-bomb0 darkjak-bomb1 darkjak-tracking darkjak-invinc lighteco lightjak lightjak-regen lightjak-swoop lightjak-freeze lightjak-shield))
+                                    (set! (-> *game-info* debug-features) (game-feature sidekick board board-launch board-zap board-trail darkeco darkjak darkjak-smack darkjak-bomb0 darkjak-bomb1 darkjak-tracking darkjak-invinc lighteco lightjak lightjak-regen lightjak-swoop lightjak-freeze lightjak-shield))
+                                  ))
        (flag "Cam 1" pad-1 dm-cam-externalize)
        (flag "Turbo Cam" *camera-turbo-free* dm-boolean-toggle-pick-func)
        (flag "Target" #f ,(lambda ((arg0 int) (arg1 debug-menu-msg) (arg2 float))
