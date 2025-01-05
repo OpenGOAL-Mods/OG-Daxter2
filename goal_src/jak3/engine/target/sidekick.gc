@@ -393,7 +393,7 @@
           ((target-grab)
             (set! (-> self offset trans y) (meters -2.1)) ;; up/down
             )
-          ((target-powerjak-get-on target-darkjak-get-on target-lightjak-get-on)
+          ((target-powerjak-get-on target-darkjak-get-on target-lightjak-get-on target-darkjak-smack-charge target-darkjak-smack)
             (set! (-> self offset trans y) (meters -1.5)) ;; up/down
             )
           ((target-stance target-invisible-get-on)

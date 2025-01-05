@@ -1428,6 +1428,7 @@
   (none)
   )
 
+(declare-type task-manager-prebot process)
 (defun display-loop-main ((arg0 display))
   "Main function to run entire game engine."
   (with-pp
@@ -1492,6 +1493,7 @@
           'target-slide-down
           'target-falling
           'target-attack-air
+          'target-launch-dixr
           ;; also used for daxter driving
           'target-pilot-edge-grab
           'target-pilot-get-on
@@ -1571,6 +1573,8 @@
           'target-darkjak-get-off
           'target-darkjak-bomb0
           'target-darkjak-bomb1
+          'target-darkjak-smack
+          'target-darkjak-smack-charge
           'target-invisible-get-on
           'target-lightjak-get-on
           'target-lightjak-freeze
@@ -1602,6 +1606,8 @@
           ;; warp
           'target-warp-in
           'target-warp-out
+          ;; idk needed this for dax missile mission?
+          'target-load-wait
           )
           ;; do nothing
           ;; (format 0 "no indax event while in ~S next state ~S ~%" (-> *target* state name) (-> *target* next-state name))
