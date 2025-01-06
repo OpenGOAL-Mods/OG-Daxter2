@@ -405,8 +405,11 @@
           ((target-lightjak-freeze)
             (set! (-> self offset trans y) (meters -0.5)) ;; up/down
             )
-          ((target-lightjak-regen target-lightjak-shield target-lightjak-swoop target-lightjak-swoop-again target-lightjak-swoop-falling target-lightjak-get-off)
+          ((target-lightjak-regen target-lightjak-shield target-lightjak-get-off)
             (set! (-> self offset trans y) (meters -1.5)) ;; up/down
+            )
+          ((target-lightjak-swoop target-lightjak-swoop-again target-lightjak-swoop-falling)
+            (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative
             )
           ((target-flut-running-attack)
             (set! (-> self offset trans x) (meters -0.4)) ;; left/right relative

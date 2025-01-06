@@ -2099,6 +2099,11 @@
           (set! (-> v0-0 quad) (-> v1-0 trans quad))
           (vector+float*! v0-0 v0-0 (-> this control local-normal) 8192.0)
           )
+         ((focus-test? this indax) ;; dax3 aim at daxter u idiots
+          (set! v0-0 (new 'static 'vector))
+          (set! (-> v0-0 quad) (-> v1-0 trans quad))
+          (vector+float*! v0-0 v0-0 (-> this control local-normal) 3000.0)
+          )
          (else
            (set! v0-0 (vector<-cspace! (new 'static 'vector) (-> this node-list data 6)))
            (set! (-> v0-0 w) 4096.0)
@@ -2110,7 +2115,7 @@
        (target-cam-pos)
        )
       ((= arg0 5)
-       (if (= (-> this draw origin w) 0.0)
+       (if (or (= (-> this draw origin w) 0.0) (focus-test? this indax)) ;; dax3 aim at daxter u idiots
            (-> v1-0 trans)
            (-> this draw origin)
            )

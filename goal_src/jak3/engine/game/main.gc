@@ -1495,6 +1495,7 @@
           'target-attack-air
           'target-launch-dixr
           ;; also used for daxter driving
+          'target-pilot-grab
           'target-pilot-edge-grab
           'target-pilot-get-on
           'target-pilot-start
@@ -1552,16 +1553,29 @@
           'target-mech-punch
           'target-mech-stance
           'target-mech-start
+          'target-mech-shield
           'target-mech-walk
           ;; turrets
           'target-turret-get-off
           'target-turret-get-on
           'target-turret-stance
+          'target-turret-stance-fire
           ;; misc
           'target-title
           'target-float
           'target-continue
           'target-grab
+          'target-grab-ride
+          ;; 'target-swim
+          ;; 'target-swim-jump
+          ;; 'target-swim-jump-jump
+          ;; 'target-swim-stance
+          ;; 'target-swim-walk
+          'target-swim-up
+          'target-swim-down
+          'process-drawable-art-error
+          'target-tube-walk
+          'target-credits
           ;; edge grabs
           'target-edge-grab
           'target-edge-grab-jump

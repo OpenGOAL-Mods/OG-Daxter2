@@ -2732,6 +2732,7 @@
       )
     )
   :enter (behavior ()
+    (format 0 "entering target-lightjak-shield~%")
     (set-time! (-> self state-time))
     (logior! (-> self target-flags) (target-flags tf4))
     (set! (-> self neck flex-blend) 0.0)
