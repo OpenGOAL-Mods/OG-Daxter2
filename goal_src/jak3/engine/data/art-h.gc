@@ -426,6 +426,10 @@ Each process-drawable has a draw-control."
   `(-> self node-list data (joint-node-index ,jg ,name))
   )
 
+(defmacro sidekick-joint-node (jg name)
+  `(-> (ppointer->process (-> self sidekick)) node-list data (joint-node-index ,jg ,name))
+  )
+
 (defmacro defskelgroup (name ag-name joint-geom joint-anim lods
                         &key (shadow 0)
                         &key bounds

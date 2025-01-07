@@ -1230,71 +1230,142 @@
         (set! (-> (get-field-spec-by-id (-> *part-id-table* 623) (sp-field-id spt-a)) initial-valuef)
               (* 16.0 (- 1.0 (-> *setting-control* user-current slow-time)))
               )
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg main)) :rate f30-1)
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg upper_body))
-          :rate f30-1
+        (cond
+          ((focus-test? self indax)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg main)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg upper_body))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg chest)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg neckA)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg earBaseL))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg earBaseR))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lshoulder))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Rshoulder))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lelbow)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Relbow)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lhand))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Rhand))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg hips)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lthigh))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Rthigh))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lknee)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Rknee)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lankle))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Rankle))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Lball)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (sidekick-joint-node daxter-lod0-jg Rball)) :rate f30-1)
+            )
+          (else
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg main)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg upper_body))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg chest)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg neckA)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg MhairA))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg MhairB))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lshould))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rshould))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Larm)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rarm)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lforarm))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rforarm))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg hips)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lthigh))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rthigh))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lknee)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rknee)) :rate f30-1)
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lankle))
+              :rate f30-1
+              )
+            (launch-particles
+              (-> *part-id-table* 623)
+              (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rankle))
+              :rate f30-1
+              )
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Ltoes)) :rate f30-1)
+            (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rtoes)) :rate f30-1)
+            )
           )
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg chest)) :rate f30-1)
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg neckA)) :rate f30-1)
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg MhairA))
-          :rate f30-1
-          )
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg MhairB))
-          :rate f30-1
-          )
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lshould))
-          :rate f30-1
-          )
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rshould))
-          :rate f30-1
-          )
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Larm)) :rate f30-1)
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rarm)) :rate f30-1)
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lforarm))
-          :rate f30-1
-          )
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rforarm))
-          :rate f30-1
-          )
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg hips)) :rate f30-1)
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lthigh))
-          :rate f30-1
-          )
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rthigh))
-          :rate f30-1
-          )
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lknee)) :rate f30-1)
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rknee)) :rate f30-1)
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Lankle))
-          :rate f30-1
-          )
-        (launch-particles
-          (-> *part-id-table* 623)
-          (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rankle))
-          :rate f30-1
-          )
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Ltoes)) :rate f30-1)
-        (launch-particles (-> *part-id-table* 623) (vector<-cspace! gp-3 (joint-node jakb-lod0-jg Rtoes)) :rate f30-1)
         )
       )
     )
@@ -1375,7 +1446,7 @@
     (set-time! (-> self fact shield-use-time))
     (set-time! (-> self water distort-time))
     (target-gun-end-mode #t)
-    (if (-> self lightjak shield)
+    (if (and (-> self lightjak shield) (type? (ppointer->process (-> self lightjak shield)) lightjak-shield))
         (send-event (ppointer->process (-> self lightjak shield)) 'open)
         (set! (-> self lightjak shield)
               (process-spawn lightjak-shield :init lightjak-shield-init :name "lightjak-shield" :to (target-powerjak-choose-part-proc self))
@@ -3072,7 +3143,21 @@
               )
             )
           (else
-            (format 0 "weirdness in lightjak-shield:open ~A~%" gp-0)
+            (set! (-> gp-1 quad) (-> (get-trans *target* 3) quad))
+            (vector-normalize-copy! s5-0 (-> s4-0 fvec) 0.0)
+            (matrix->quaternion (-> self root quat) s4-0)
+            (let ((v1-11 (-> self root trans)))
+              (let ((a0-5 f30-0))
+                (.mov vf7 a0-5)
+                )
+              (.lvf vf5 (&-> s5-0 quad))
+              (.lvf vf4 (&-> gp-1 quad))
+              (.add.x.vf vf6 vf0 vf0 :mask #b1000)
+              (.mul.x.vf acc vf5 vf7 :mask #b111)
+              (.add.mul.w.vf vf6 vf4 vf0 acc :mask #b111)
+              (.svf (&-> v1-11 quad) vf6)
+              )
+            ;; (format 0 "weirdness in lightjak-shield:open ~A~%" gp-0)
             )
           )
         )
