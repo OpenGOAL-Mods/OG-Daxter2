@@ -1192,6 +1192,10 @@
     (set! (-> this fact pickup-type) (pickup-type eco-pill-random))
     (set! (-> this fact pickup-amount) 0.0)
     )
+  ;; dax3 - ammo kinda useless, give eco
+  (case (-> this fact pickup-type)
+    (((pickup-type ammo-red) (pickup-type ammo-yellow) (pickup-type ammo-blue) (pickup-type ammo-dark))
+      (set! (-> this fact pickup-type) (pickup-type eco-pill-random))))
   (when arg0
     (process-drawable-from-entity! this arg0)
     (logclear! (-> this mask) (process-mask actor-pause))
