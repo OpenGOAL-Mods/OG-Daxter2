@@ -231,6 +231,7 @@ class SimpleExpressionElement : public FormElement {
   void update_from_stack_vector_plus_float_times(const Env& env,
                                                  FormPool& pool,
                                                  FormStack& stack,
+                                                 FixedOperatorKind op,
                                                  std::vector<FormElement*>* result,
                                                  bool allow_side_effects);
   void update_from_stack_vectors_in_common(FixedOperatorKind kind,
@@ -1274,6 +1275,7 @@ class DerefToken {
 };
 
 DerefToken to_token(const FieldReverseLookupOutput::Token& in);
+std::vector<DerefToken> to_tokens(const std::vector<FieldReverseLookupOutput::Token>& in);
 
 class DerefElement : public FormElement {
  public:
@@ -1302,6 +1304,7 @@ class DerefElement : public FormElement {
 
  private:
   ConstantTokenElement* try_as_art_const(const Env& env, FormPool& pool);
+  ConstantTokenElement* try_as_part_group_const(const Env& env, FormPool& pool);
   GenericElement* try_as_joint_node_index(const Env& env, FormPool& pool);
   GenericElement* try_as_curtime(const Env& env, FormPool& pool);
   GenericElement* try_as_seconds_per_frame(const Env& env, FormPool& pool);
@@ -1824,6 +1827,8 @@ class DefpartElement : public FormElement {
           case GameVersion::Jak2:
           case GameVersion::Jak3:
             return field_id == 72;
+          case GameVersion::JakX:
+            return field_id == 71;
           default:
             ASSERT_MSG(false, fmt::format("unknown version for is_sp_end"));
             return false;
