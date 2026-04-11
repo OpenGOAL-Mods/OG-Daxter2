@@ -761,6 +761,7 @@
        (ja :group! jakb-jump-loop-ja)
        )
       ((and (logtest? (-> self control status) (collide-status on-surface))
+            (not (focus-test? self dark)) ;; added for dax3, prevent anim error when hit as dark dax?
             (let ((v1-15 (ja-group)))
               (and (not (and v1-15 (= v1-15 jakb-jump-land-ja)))
                    (not (logtest? (-> self control status) (collide-status on-water)))

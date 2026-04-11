@@ -1443,17 +1443,6 @@
       ;; turn off invis wall in stadium
       (let ((wb (process-by-ename "wstd-blocker-1")))
         (when wb (send-event wb 'off)))
-
-      ;; hack to close task after robo skip
-      (let ((pb (process-by-ename "prebot-2")))
-        (when (and pb
-                  (name= (-> pb next-state name) 'beaten)
-                  (nonzero? (-> *task-manager-engine* length))
-                  (= (-> *task-manager-engine* data 0 param1 type) task-manager-prebot)
-                  )
-          (task-close! "mine-boss-resolution")
-          )
-        )
       
       ;; switch in/out of daxter states
       (case (-> *target* state name)

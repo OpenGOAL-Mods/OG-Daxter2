@@ -712,7 +712,7 @@
     )
   :enter (behavior ((arg0 string))
     (if (and (-> self prev-state) (nonzero? (-> self prev-state)))
-        (format 0 "process ~A in process-drawable-art-error from state ~S~%" (-> self name) (-> self prev-state name))
+        (format 0 "process ~A in process-drawable-art-error from state ~S ~A~%" (-> self name) (-> self prev-state name) arg0)
         )
     (if (-> self entity)
         (logior! (-> self entity extra perm status) (entity-perm-status error))

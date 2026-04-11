@@ -250,6 +250,7 @@
        (go-virtual pre-slam)
        )
       (else
+        (task-close! "mine-boss-resolution") ;; added for dax3, count roboskip as mission close
         (go-virtual beaten)
         )
       )
